@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { getRestaurantsNearStation, getRestaurantMainPhoto } = require('../controllers/restaurant_controller')
+const { getRestaurantsNearStation, getRestaurantDetail } = require('../controllers/restaurant_controller')
 // const { getAmount, addToWhistlist,RemoveFromWhistlist, getTrending,getUserWhistlist } = require('../controllers/collect_controller');
 
 router.route('/restaurant').get(getRestaurantsNearStation);
-router.route('/restaurant/photo/:photo_reference').get(getRestaurantMainPhoto);
+router.route('/restaurant/:place_id').get(getRestaurantDetail);
 module.exports = router;
