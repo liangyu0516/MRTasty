@@ -6,6 +6,7 @@ const StyledHeader = styled.div`
     padding: 0.2vw 1vw;
     display: flex;
     align-items: left;
+    border-bottom: 0.5vh solid black;
 `
 
 const Logo = styled.img`
