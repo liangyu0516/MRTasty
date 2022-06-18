@@ -79,6 +79,7 @@ function Map() {
   	const [typeInput, setTypeInput] = useState('')
   	const [type, setType] = useState('')
   	const [station, setStation] = useState()
+	const [isHovering, setIsHovering] = useState(false)
 
 	async function handleClickOnStation (station) {
 		setStation(station.chinese)
@@ -94,13 +95,18 @@ function Map() {
 			<div style={ {'width': '10vw', 'background-color': '#E0E0E0'} }>
 				<SearchBar id='type' name="type" value={typeInput} onChange={(e) => setTypeInput(e.target.value)}/>
 				<SearchButton onClick={() => setType(typeInput)}>搜尋</SearchButton>
+				{isHovering && (
+					<div>
+						西門
+					</div>
+				)}
 			</div>
 			<div>
 				<MapTitle>台北捷運{type}地圖</MapTitle>
 				<svg height="200vh" width="65vw" font-weight='600'>
 					<path strokeLinejoin="round" strokeLinecap="round" fill='white' d="M323 600 L323 110 Q328,65 373,60 L 720 60 Q765,65 770,110 L770 360" stroke="#b8860b" strokeWidth="10" />
 					<path strokeLinejoin="round" strokeLinecap="round" d="M5 600 L720 600 Q765,595 770,550 L770 360" fill='none' stroke="#0000ff" strokeWidth="10" />
-					<g id='Ximen' font-size="15" onClick={() => handleClickOnStation({'english': 'Ximen', 'chinese': '西門'})} onMouseEnter={e => {console.log('eee')}}>
+					<g id='Ximen' font-size="15" onClick={() => handleClickOnStation({'english': 'Ximen', 'chinese': '西門'})} onMouseOver={e => {setIsHovering(true)}} onMouseOut={e => {setIsHovering(false)}}>
 						<rect x="5" y="583" rx="5" ry="5" width="35" height="35" fill={color} stroke="blue" strokeWidth="2" />
 						<text x="12" y="600" font-family="Montserrat, sans-serif" fill="black">BL</text>
 						<text x="14" y="613" font-family="Montserrat, sans-serif" fill="black">11</text>
