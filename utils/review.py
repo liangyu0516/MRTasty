@@ -21,10 +21,10 @@ while(j < 500):
 	print(j)
 	#url = "https://www.google.com.tw/maps/preview/review/listentitiesreviews?authuser=0&hl=zh-TW&gl=tw&pb=!1m2!1y3765762734390772041!2y17055821615375049737!2m2!1i"+ str(j) +"!2i10!3e1!4m5!3b1!4b1!5b1!6b1!7b1!5m2!1siMZEYbemFIeymAWI2pko!7e81"
 	# 鳥人：
-	url = "https://www.google.com/maps/preview/review/listentitiesreviews?authuser=0&hl=zh-TW&gl=tw&pb=!1m2!1y3765759069937952471!2y15803895973860704585!2m2!1i"+ str(j) +"!2i10!3e1!4m5!3b1!4b1!5b1!6b1!7b1!5m2!1ssVatYqf8G-ukmAXytJawBA!7e81"
+	url = "https://www.google.com/maps/preview/review/listentitiesreviews?authuser=0&hl=zh-TW&gl=tw&pb=!1m2!1y3765761193709017321!2y4062972864771442104!2m2!1i"+ str(j) +"!2i10!3e1!4m5!3b1!4b1!5b1!6b1!7b1!5m2!1sjc-uYua0M4jm0QTavbuwBA!7e81"
 	j = j + 10
 		
-	text = requests.get(url, headers=headers) # 發送get請求 (這邊我是看zino lin大神的教學)
+	text = requests.get(url, headers=headers)
 	text.encoding = 'utf-8'
 	text = text.text
 	pretext = ')]}\'' # 取代特殊字元
