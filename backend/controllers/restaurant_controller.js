@@ -1,39 +1,10 @@
 const axios = require('axios');
 const jsSHA = require('jssha');
-
-async function getPosition (station) {
-	var longtitude = null
-	var latitude = null
-
-	const getAuthorizationHeader = function() {
-		var AppID = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
-		var AppKey = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
-	
-		var GMTString = new Date().toGMTString();
-		var ShaObj = new jsSHA('SHA-1', 'TEXT');
-		ShaObj.setHMACKey(AppKey, 'TEXT');
-		ShaObj.update('x-date: ' + GMTString);
-		var HMAC = ShaObj.getHMAC('B64');
-		var Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
-	
-		return { 'Authorization': Authorization, 'X-Date': GMTString};
-	}
-	
-	await axios.get("https://ptx.transportdata.tw/MOTC/v2/Rail/Metro/Station/TRTC?$format=json&$filter=StationName/En eq '" + station + "'", {
-		headers: getAuthorizationHeader(),
-	})
-	.then(function(response){
-		latitude = response.data[0].StationPosition.PositionLat
-		longtitude = response.data[0].StationPosition.PositionLon
-	});
-
-	return [latitude, longtitude]
-}
+const Station = require('../models/station_model');
 
 const getRestaurantsNearStation = async (req, res) => {
 	const { keyword, station } = req.query;
-	//let [latitude, longtitude] = await getPosition(station)
-	let [latitude, longtitude] = [25.042025, 121.508175]
+	let [latitude, longtitude] = await Station.getStationPosition(station)
 
 	var config = {
 		method: 'get',
@@ -49,9 +20,6 @@ const getRestaurantsNearStation = async (req, res) => {
 	 	// console.log(error);
 		res.status(400).json(error)
 	});
-
-	/* 
-	res.status(200).json({ count: collectCount }); */
 };
 
 const getRestaurantDetail = async (req, res) => {
