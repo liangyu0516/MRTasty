@@ -45,8 +45,8 @@ function Restaurant() {
 				<Detail>
 					{info?.formatted_address}<br />
 					{info?.opening_hours?.weekday_text.map((day) => (<div>{day}</div>))}			
-				電話：{info?.formatted_phone_number}<br />
-				網站：{info?.website}<br />
+					電話：{info?.formatted_phone_number}<br />
+					網站：{info?.website}<br />
 				</Detail>
 				{info?.photos.map((photo) => (<img width={photo.width /50} height={photo.height/50} src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + photo.photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />))}<br />
 				評分數：{info?.user_ratings_total}<br />
