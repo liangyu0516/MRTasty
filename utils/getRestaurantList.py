@@ -19,7 +19,7 @@ headers = {}
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # Get info of all stations
-cur.execute("SELECT * FROM Station")
+cur.execute("SELECT Name_en FROM Station")
 stations = cur.fetchall()
 
 for s in stations:
