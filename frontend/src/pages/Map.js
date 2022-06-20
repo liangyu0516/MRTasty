@@ -136,7 +136,7 @@ function Map(props) {
 				<MapTitle>台北捷運{props.type}地圖</MapTitle>
 				<MapContainer>
 					<svg height="200vh" width="100vw" font-weight='600'>
-						<path strokeLinejoin="round" strokeLinecap="round" fill='white' d="M168 70 L168 315 Q173,360 218,365 L550 365 Q595,370 600,415 L600 1415" stroke="red" strokeWidth="10" />
+						<path strokeLinejoin="round" strokeLinecap="round" fill='white' d="M168 70 L168 315 Q173,360 218,365 L550 365 Q595,370 600,415 L600 1367 L 1500 1367" stroke="red" strokeWidth="10" />
 						<RStation id='Tamsui' onClick={() => handleClickOnStation({'english': 'Tamsui', 'chinese': '淡水'})}>
 							<rect id='childRect' x="150" y="50" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
 							<text id='childText' x="162" y="67" font-family="Montserrat, sans-serif" fill="black">R</text>
@@ -256,6 +256,36 @@ function Map(props) {
 							<text id='childText' x="590" y="1006" font-family="Montserrat, sans-serif" fill="black">12</text>
 							<text x="622" y="990" font-family="Microsoft YaHei" fill="black">雙連</text>
 							<text x="622" y="1005" font-family="Montserrat, sans-serif" font-size="12" fill="black">Shuanglian</text>
+						</RStation>
+						<RStation id='Zhongshan' onClick={() => handleClickOnStation({'english': 'Zhongshan', 'chinese': '中山'})}>
+							<rect id='childRect' x="582" y="1050" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
+							<text id='childText' x="594" y="1067" font-family="Montserrat, sans-serif" fill="black">R</text>
+							<text id='childText' x="591" y="1081" font-family="Montserrat, sans-serif" fill="black">11</text>
+							<text x="622" y="1032" font-family="Microsoft YaHei" fill="black">中山</text>
+							<text x="622" y="1047" font-family="Montserrat, sans-serif" font-size="12" fill="black">Zhongshan</text>
+						</RStation>
+						<RStation id='Taipei Main Station' onClick={() => handleClickOnStation({'english': 'Taipei Main Station', 'chinese': '台北車站'})}>
+							<rect id='childRect' x="582" y="1200" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
+							<text id='childText' x="594" y="1217" font-family="Montserrat, sans-serif" fill="black">R</text>
+							<text id='childText' x="590" y="1231" font-family="Montserrat, sans-serif" fill="black">10</text>
+							<text x="622" y="1170" font-family="Microsoft YaHei" fill="black">台北車站</text>
+							<text x="622" y="1185" font-family="Montserrat, sans-serif" font-size="12" fill="black">Taipei Main</text>
+							<text x="622" y="1195" font-family="Montserrat, sans-serif" font-size="12" fill="black">Station</text>
+						</RStation>
+						<RStation id='NTU Hospital' onClick={() => handleClickOnStation({'english': 'NTU Hospital', 'chinese': '台大醫院'})}>
+							<rect id='childRect' x="582" y="1275" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
+							<text id='childText' x="594" y="1292" font-family="Montserrat, sans-serif" fill="black">R</text>
+							<text id='childText' x="591" y="1306" font-family="Montserrat, sans-serif" fill="black">09</text>
+							<text x="622" y="1290" font-family="Microsoft YaHei" fill="black">台大醫院</text>
+							<text x="622" y="1305" font-family="Montserrat, sans-serif" font-size="12" fill="black">NTU Hospital</text>
+						</RStation>
+						<RStation id='Chiang Kai-Shek Memorial Hall' onClick={() => handleClickOnStation({'english': 'Chiang Kai-Shek Memorial Hall', 'chinese': '中正紀念堂'})}>
+							<rect id='childRect' x="582" y="1350" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
+							<text id='childText' x="594" y="1367" font-family="Montserrat, sans-serif" fill="black">R</text>
+							<text id='childText' x="591" y="1381" font-family="Montserrat, sans-serif" fill="black">08</text>
+							<text x="500" y="1403" font-family="Microsoft YaHei" fill="black">中正紀念堂</text>
+							<text x="485" y="1418" font-family="Montserrat, sans-serif" font-size="12" fill="black">Chiang Kai-Shek</text>
+							<text x="502" y="1428" font-family="Montserrat, sans-serif" font-size="12" fill="black">Memorial Hall</text>
 						</RStation>
 					</svg>
 				</MapContainer>
