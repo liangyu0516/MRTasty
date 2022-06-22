@@ -12,7 +12,7 @@ const MapTitle = styled.div`
 `
 
 const MapContainer = styled.div`
-	height: 94vh;
+	height: 86vh;
 	width: 75vw;
 	overflow: scroll;
 `
@@ -89,15 +89,26 @@ const BLStation = styled.g`
 	}
 `
 
+const BRStation = styled.g`
+	font-size: 15;
+	cursor: pointer;
+	&:hover #childRect {
+		color: white;
+		fill: #DB8F00;
+	}
+	&:hover #childText {
+		fill: white;
+	}
+`
+
 function Map(props) {
   	const [color, setColor] = useState('white')
   	const [restaurants, setRestaurants] = useState([])
-  	const [typeInput, setTypeInput] = useState('')
-  	const [type, setType] = useState('')
   	const [station, setStation] = useState()
 	const [isHovering, setIsHovering] = useState(false)
 
 	async function handleClickOnStation (station) {
+		props.setIsSelected(true)
 		setStation(station.chinese)
 		await axios.get("http://localhost:3100/api/v1/restaurant?keyword=" + props.type + "&station=" + station.english)
 		.then(function(response){
@@ -111,9 +122,10 @@ function Map(props) {
 			<div>
 				<MapTitle>台北捷運{props.type}地圖</MapTitle>
 				<MapContainer>
-					<svg height="350vh" width="200vw" font-weight='600'>
+					<svg height="350vh" width="110vw" font-weight='600'>
 						<path strokeLinejoin="round" strokeLinecap="round" fill='white' d="M168 70 L168 315 Q173,360 218,365 L550 365 Q595,370 600,415 L600 1367 L1120 1367" stroke="red" strokeWidth="10" />
 						<path strokeLinejoin="round" strokeLinecap="round" fill='none' d="M450 1950 L450 1268 Q455,1223 500 1218 L1295 1218 Q1340,1213 1345,1168 L1345 980" stroke="blue" strokeWidth="10" />
+						<path strokeLinejoin="round" strokeLinecap="round" fill='none' d="M1345 980 L1345 745 Q1340 700 1295 695 L950 695 Q905,700 900,745 L900 1500" stroke="#DB8F00" strokeWidth="10" />
 						<RStation id='Tamsui' onClick={() => handleClickOnStation({'english': 'Tamsui', 'chinese': '淡水'})}>
 							<rect id='childRect' x="150" y="50" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
 							<text id='childText' x="162" y="67" font-family="Montserrat, sans-serif" fill="black">R</text>
@@ -468,6 +480,62 @@ function Map(props) {
 							<text x="1232" y="1006" font-family="Montserrat, sans-serif" font-size="12" fill="black">Taipei Nangang</text>
 							<text x="1221" y="1016" font-family="Montserrat, sans-serif" font-size="12" fill="black">Exhibition Center</text>
 						</BLStation>
+						<BRStation id='Nangang Software Park' onClick={() => handleClickOnStation({'english': 'Nangang Software Park', 'chinese': '南港軟體園區'})}>
+							<rect id='childRect' x="1327" y="900" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1333" y="917" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1336" y="931" font-family="Montserrat, sans-serif" fill="black">23</text>
+							<text x="1225" y="916" font-family="Microsoft YaHei" fill="black">南港軟體園區</text>
+							<text x="1187" y="931" font-family="Montserrat, sans-serif" font-size="12" fill="black">Nangang Software Park</text>
+						</BRStation>
+						<BRStation id='Donghu' onClick={() => handleClickOnStation({'english': 'Donghu', 'chinese': '東湖'})}>
+							<rect id='childRect' x="1327" y="825" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1333" y="842" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1336" y="856" font-family="Montserrat, sans-serif" fill="black">22</text>
+							<text x="1289" y="841" font-family="Microsoft YaHei" fill="black">東湖</text>
+							<text x="1276" y="856" font-family="Montserrat, sans-serif" font-size="12" fill="black">Donghu</text>
+						</BRStation>
+						<BRStation id='Huzhou' onClick={() => handleClickOnStation({'english': 'Huzhou', 'chinese': '葫洲'})}>
+							<rect id='childRect' x="1327" y="750" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1333" y="767" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1336" y="781" font-family="Montserrat, sans-serif" fill="black">21</text>
+							<text x="1289" y="766" font-family="Microsoft YaHei" fill="black">葫洲</text>
+							<text x="1276" y="781" font-family="Montserrat, sans-serif" font-size="12" fill="black">Huzhou</text>
+						</BRStation>
+						<BRStation id='Dahu Park' onClick={() => handleClickOnStation({'english': 'Dahu Park', 'chinese': '大湖公園'})}>
+							<rect id='childRect' x="1257" y="677" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1264" y="694" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1266" y="708" font-family="Montserrat, sans-serif" fill="black">20</text>
+							<text x="1242" y="657" font-family="Microsoft YaHei" fill="black">大湖公園</text>
+							<text x="1245" y="672" font-family="Montserrat, sans-serif" font-size="12" fill="black">Dahu Park</text>
+						</BRStation>
+						<BRStation id='Neihu' onClick={() => handleClickOnStation({'english': 'Neihu', 'chinese': '內湖'})}>
+							<rect id='childRect' x="1182" y="677" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1189" y="694" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1191" y="708" font-family="Montserrat, sans-serif" fill="black">19</text>
+							<text x="1183" y="657" font-family="Microsoft YaHei" fill="black">內湖</text>
+							<text x="1183" y="672" font-family="Montserrat, sans-serif" font-size="12" fill="black">Neihu</text>
+						</BRStation>
+						<BRStation id='Wende' onClick={() => handleClickOnStation({'english': 'Wende', 'chinese': '文德'})}>
+							<rect id='childRect' x="1107" y="677" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1114" y="694" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1116" y="708" font-family="Montserrat, sans-serif" fill="black">18</text>
+							<text x="1106" y="657" font-family="Microsoft YaHei" fill="black">文德</text>
+							<text x="1104" y="672" font-family="Montserrat, sans-serif" font-size="12" fill="black">Wende</text>
+						</BRStation>
+						<BRStation id='Gangqian' onClick={() => handleClickOnStation({'english': 'Gangqian', 'chinese': '港墘'})}>
+							<rect id='childRect' x="1032" y="677" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="1039" y="694" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="1041" y="708" font-family="Montserrat, sans-serif" fill="black">17</text>
+							<text x="1031" y="657" font-family="Microsoft YaHei" fill="black">港墘</text>
+							<text x="1020" y="672" font-family="Montserrat, sans-serif" font-size="12" fill="black">Gangqian</text>
+						</BRStation>
+						<BRStation id='Xihu' onClick={() => handleClickOnStation({'english': 'Xihu', 'chinese': '西湖'})}>
+							<rect id='childRect' x="957" y="677" rx="5" ry="5" width="35" height="35" fill={color} stroke="#DB8F00" strokeWidth="2" />
+							<text id='childText' x="964" y="694" font-family="Montserrat, sans-serif" fill="black">BR</text>
+							<text id='childText' x="966" y="708" font-family="Montserrat, sans-serif" fill="black">16</text>
+							<text x="958" y="657" font-family="Microsoft YaHei" fill="black">西湖</text>
+							<text x="961" y="672" font-family="Montserrat, sans-serif" font-size="12" fill="black">Xihu</text>
+						</BRStation>
 					</svg>
 				</MapContainer>
 			</div>

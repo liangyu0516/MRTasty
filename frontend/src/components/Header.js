@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import logo from '../images/logo.jpg'
 
 const StyledHeader = styled.div`
-	padding: 0.2vw 1vw;
+	padding: 0.5vh 1vw;
 	display: flex;
 	align-items: center;
 	border-bottom: 0.5vh solid black;
@@ -32,7 +32,7 @@ const Type = styled.div`
 function Header(props) {
 	return (
 		<StyledHeader>
-			<Logo src={logo} />
+			<Logo src={logo}/>
 			<div style={{'margin-left': '20vw', 'display': 'flex', 'flex-direction': 'row'}}>
 				<Type onClick={() => props.setType('拉麵')}>拉麵</Type>
 				<Type onClick={() => props.setType('火鍋')}>火鍋</Type>
