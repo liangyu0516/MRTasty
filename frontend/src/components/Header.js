@@ -17,9 +17,9 @@ const Logo = styled.img`
 const Type = styled.div`
 	letter-spacing: 0.3vw;
 	margin-right: 2vw;
-	padding: 0.2vh 0.3vw 0.2vh 0.5vw;
+	padding: 0.5vh 0.6vw 0.5vh 0.8vw;
 	color: white;
-	font-size: 1.6vh;
+	font-size: 2vh;
 	font-weight: 500;
 	font-family: Microsoft YaHei;
 	text-align: center;
@@ -33,8 +33,8 @@ function Header(props) {
 	return (
 		<StyledHeader>
 			<Logo src={logo}/>
-			<div style={{'margin-left': '20vw', 'display': 'flex', 'flex-direction': 'row'}}>
-				<Type onClick={() => props.setType('拉麵')}>拉麵</Type>
+			<div style={{'margin-left': '27vw', 'display': 'flex', 'flex-direction': 'row'}}>
+				<Type onClick={() => props.setType('拉麵')} >拉麵</Type>
 				<Type onClick={() => props.setType('火鍋')}>火鍋</Type>
 				<Type onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
 				<Type onClick={() => props.setType('飲料')}>飲料</Type>

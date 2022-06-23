@@ -9,18 +9,20 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
 	const [type, setType] = useState('')
+	const [station, setStation] = useState()
 	const [isSelected, setIsSelected] = useState(false)
-	console.log(isSelected)
+	const [restaurants, setRestaurants] = useState([])
+
 	return (
 		<Router>
 			<div className="App">
 			<Header setType={setType}/>
 				<Routes>
-				<Route path="/" element={<Map type={type} setIsSelected={setIsSelected}/>} />
+				<Route path="/" element={<Map type={type} setStation={setStation} setIsSelected={setIsSelected} setRestaurants={setRestaurants}/>} />
 				<Route path="/restaurant/:place_id" element={<Restaurant />} />
 				</Routes>
 			</div>
-			{isSelected && <Modal setIsSelected={setIsSelected} />}
+			{isSelected && <Modal station={station} setIsSelected={setIsSelected} restaurants={restaurants}/>}
 		</Router>
 	);
 }

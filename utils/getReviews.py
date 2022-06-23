@@ -133,6 +133,8 @@ for i in range(len(rates)):
 	print(rates[i]['aria-label'].split(' ')[1]) 
 	print(times[i].text) 
 	print(reviews[i].text)
+	cur.execute('INSERT INTO REVIEW (Rid, Time, Rate, Content) VALUES (18, "' + times[i].text + '", ' + rates[i]['aria-label'].split(' ')[1] + ', "'  + reviews[i].text + '")')
+	db.commit()
 	all_reviews_text += reviews[i].text
 
 #擷取文章前十大關鍵字
