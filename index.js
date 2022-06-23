@@ -7,6 +7,7 @@ const cors = require("cors");
 app.use(cors());
 
 app.use('/api/v1', require('./backend/routes/restaurant_route'))
+app.use('/api/v1', require('./backend/routes/review_route'))
 
 app.listen(PORT, console.log("Server listening on port: " + PORT))
 

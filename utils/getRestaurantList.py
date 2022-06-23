@@ -19,7 +19,7 @@ headers = {}
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # Get info of all stations
-cur.execute("SELECT Name_en FROM Station")
+cur.execute("SELECT * FROM Station")
 stations = cur.fetchall()
 
 for s in stations:
@@ -55,7 +55,7 @@ for s in stations:
 			url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(r) + "&keyword=拉麵&language=zh-TW&key=" + GOOGLE_API_KEY
 			response = requests.request("GET", url, headers = headers, data = payload)
 			for restaurant in json.loads(response.text)['results']:
-				cur.execute("UPDATE RESTAURANT SET Distance = " + str(r) + " WHERE Place_id = '" + restaurant['place_id'] + "'")
+				cur.execute("UPDATE RESTAURANT SET Distance = " + str(r) + " WHERE Sid = " + str(sid) + " and Place_id = '" + restaurant['place_id'] + "'")
 				db.commit()
 			while 1:    
 				try:

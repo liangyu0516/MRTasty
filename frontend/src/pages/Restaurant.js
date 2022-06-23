@@ -25,12 +25,18 @@ const Detail = styled.div`
 function Restaurant() {
 	const place_id = window.location.pathname.split("/")[2]
 	const [info, setInfo] = useState()
+	const [reviews, setReviews] = useState()
 
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
 		.then(function(response){
 			console.log(response)
 			setInfo(response.data.result)
+		});
+		axios.get("http://localhost:3100/api/v1/review/" + place_id)
+		.then(function(response){
+			console.log(response)
+			setReviews(response.data)
 		});
 	}, []);
 

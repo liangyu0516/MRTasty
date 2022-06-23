@@ -2,6 +2,8 @@ import { createPortal } from "react-dom";
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from "react-router-dom";
+import star from '../images/star.png'
+import foot from '../images/foot.png'
 
 const StyledModal = styled.div`
 	background-color: rgba(0,0,0,0.5);
@@ -29,7 +31,7 @@ const Station = styled.div`
 
 const Restaurants = styled.a`
 	width: 50vw;
-	height: 50vh;
+	height: 60vh;
 	display: flex;
 	font-family: Microsoft YaHei;
 	flex-direction: column;
@@ -57,10 +59,38 @@ const MainImg = styled.img`
 const Info = styled.div`
 	margin-left: 1vw;
 	text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `
 const Name = styled.div`
-	margin-bottom: 10px;
+	margin-bottom: 1vh;
 	font-size: 1.5vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const Stars = styled.div`
+	display: flex;
+	flex-direction: row;
+`
+
+const StarImg = styled.img`
+	margin-bottom: 1vh;
+	width: 1.1vw;
+	height: 1.1vw;
+`
+
+const Distance = styled.div`
+	display: flex;
+	flex-direction: row;
+`
+
+const FootImg = styled.img`
+	margin-right: 0.3vw;
+	width: 1.1vw;
+	height: 1.1vw;
 `
 
 const modalRoot = document.getElementById('modal-root');
@@ -94,8 +124,15 @@ class Modal extends React.Component {
 									<Name>
 										{restaurant.Name}
 									</Name>
-									{restaurant.Rating}<br/>
-									{restaurant.Distance}<br/>
+									<Stars>
+										{new Array(restaurant.Rating).fill(null).map(() => (
+											<StarImg src={star} />
+										))}
+									</Stars>
+									<Distance>
+										<FootImg src={foot} />
+										<div>{restaurant.Distance} 公尺</div>
+									</Distance>
 								</Info>
 							</Restaurant>
 						</Link>
