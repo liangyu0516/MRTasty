@@ -13,10 +13,27 @@ const signUp = async (req, res) => {
         return res.status(403).send({error: result.error});
     }
     else {
-        return res.cookie("access_token", result.access_token, { httpOnly: true }).status(200).send(result)
+        return res.cookie("access_token", result.access_token, { httpOnly: true, secure: true}).status(200).send(result)
+    }
+};
+
+const signIn = async (req, res) => {
+    const { email, password} = req.body;
+
+    if(!email || !password) {
+        return res.status(400).send({error:'Request Error: name, email and password are required.'});
+    }
+
+    const result = await User.signIn(email, password);
+    if (result.error) {
+        return res.status(403).send({error: result.error});
+    }
+    else {
+        return res.cookie("access_token", result.access_token, { httpOnly: true}).status(200).json(result)
     }
 };
 
 module.exports = {
 	signUp,
+    signIn,
 };

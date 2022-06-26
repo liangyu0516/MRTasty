@@ -27,6 +27,35 @@ const signUp = async (email, username, password) => {
     }
 }
 
+const signIn = async (email, password) => {
+    const user = await pool.query("SELECT * FROM USER WHERE Email = ?", [email])
+
+    if (user[0].length == 0){
+        return {error: '信箱不存在哦，請先註冊'};
+    }
+    else {
+        if (!(await bcrypt.compare(password, user[0][0].Password))) {
+            return {error: '密碼錯誤'};
+        }
+        else {
+            var token = jwt.sign(
+                {
+                    Uid: user[0][0].Uid,
+                    Username: user[0][0].Username,
+                    Email: user[0][0].Email
+                },
+                process.env.TOKEN_KEY,
+                {
+                    algorithm: 'HS256',
+                    expiresIn: "3h"
+                }
+            );
+            return {access_token: token}
+        }
+    }
+}
+
 module.exports = {
     signUp,
+    signIn,
 }
