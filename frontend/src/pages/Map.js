@@ -6,43 +6,37 @@ const axios = require('axios');
 
 const MapTitle = styled.div`
 	margin: 10px 0;
+	letter-spacing: 0.5vw;
 	padding: 1vw;
-	color: white;
+	color: black;
 	font-family: Microsoft YaHei;
-	font-size: 2.5vw;
-	background-color: #8FBC8F;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 10px 5px 5px black;
+	font-size: 2.7vw;
+	font-weight: 600;
 `
 
 const MapContainer = styled.div`
-	width: 100vw;
-	height: 80vh;
+	width: 90vw;
+	height: 73vh;
+	border: 1px solid black;
+	border-radius: 10px;
 	overflow: scroll;
-`
-
-const StationTitle = styled.div`
-	margin: 1.5vh 0;
-	padding: 5px 15px;
-	font-size: 2.5vw;
-	color: white;
-	border-radius: 15px;
-	background-color: blue;
-	box-shadow: 10px 5px 5px black;
-`
-
-const MainImg = styled.img`
-	width: 7vw;
-	height: 7vw;
-`
-
-const Info = styled.div`
-	margin-left: 0.3vw;
-	width: 10vw;
-	text-align: left;
-	background-color: white;
-	border: 2px solid black;
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+	}
+	&::-webkit-scrollbar
+	{
+		width: 0.7vw;
+		height: 0.7vw;
+	}
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: #336666;
+	}
 `
 
 const RStation = styled.g`
@@ -83,7 +77,6 @@ const BRStation = styled.g`
 
 function Map(props) {
   	const [color, setColor] = useState('white')
-	const [isHovering, setIsHovering] = useState(false)
 
 	async function handleClickOnStation (station) {
 		props.setIsSelected(true)

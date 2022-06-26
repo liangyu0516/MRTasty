@@ -1,31 +1,224 @@
 /* eslint-disable no-useless-escape */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import star from '../images/star.png'
+import pencil from '../images/pencil.png'
+import phone from '../images/phone.png'
+import address from '../images/address.png'
+import time from '../images/time.png'
+import website from '../images/website.png'
+import tagIcon from '../images/tag.png'
 const axios = require('axios');
 
 const Main = styled.div`
-	background-color: yellow;
+	margin-bottom: 5vh;
+	display: flex;
+	flex-direction: row;
+`
+
+const MainImg = styled.img`
+	width: 20vw;
+	height: 20vw;
+	border-radius: 15px;
+`
+
+const MainInfo = styled.div`
+	width: 40vw;
+	margin-left: 3vw;
+	padding: 1vw 2.5vw;
+	text-align: left;
+	border: 2px solid black;
+	border-radius: 15px;
+	box-shadow: 10px 5px 5px black;
+	overflow: hidden;
 `
 
 const Title = styled.div`
+	margin-bottom: 3vh;
 	font-size: 3vw;
 	font-weight: bolder;
-	background-color: pink;
+`
+
+const Ratings = styled.div`
+	margin-bottom: 2vh;
+	display: flex;
+	flex-direction: row;
 `
 
 const Rating = styled.div`
-	font-size: 1.2vw;
-	background-color: green;
+	width: 5vw;
+	margin-right: 1vw;
+	padding: 0.7vw 0.5vw;
+	font-size: 1vw;
+	font-weight: bolder;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 0px 2px 1px black;
+	background-color: 	#FFFFAA;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+`
+
+const RatingImg = styled.img`
+	width: 1.5vw;
+	height: 1.5vw;
+`
+
+const Open = styled.div`
+	width: 5vw;
+	margin-bottom: 2vh;
+	padding: 0.7vw 0.5vw;
+	font-size: 1vw;
+	font-weight: bolder;
+	letter-spacing: 0.1vw;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 0px 2px 1px black;
+	background-color: #BBFFBB;
+`
+
+const Close = styled.div`
+	width: 5vw;
+	margin-bottom: 1vh;
+	padding: 0.7vw 0.5vw;
+	font-size: 1vw;
+	font-weight: bolder;
+	letter-spacing: 0.1vw;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 0px 2px 1px black;
+	background-color: #FF5151;
+`
+
+const Tags = styled.div`
+	margin-bottom: 1vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const Tag = styled.div`
+	width: 4.4vw;
+	margin-right: 1vw;
+	padding: 0.7vw 0.8vw;
+	font-size: 1vw;
+	font-weight: bolder;
+	letter-spacing: 0.1vw;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 0px 2px 1px black;
+	background-color: #ACD6FF;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const TagImg = styled.img`
+	width: 1.5vw;
+	height: 1.5vw;
+	margin-right: 0.5vw;
 `
 
 const Detail = styled.div`
-	background-color: yellow;
+	display: flex;
+	flex-direction: row;
+`
+
+const DetailInfo = styled.div`
+	width: 15vw;
+	height: 100vh;
+	margin-right: 3vw;
+	padding: 2vw 2.5vw 0.5vw;
+	text-align: left;
+	border: 2px solid black;
+	border-radius: 15px;
+	box-shadow: 10px 5px 5px black;
+`
+
+const DetailInfoTitle = styled.div`
+	font-size: 1.5vw;
+	margin-bottom: 1vh;
+	color: #009393;
+	font-weight: 600;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const DetailInfoImg = styled.img`
+	width: 1.5vw;
+	height: 1.5vw;
+	margin-right: 0.3vw;
+`
+
+const DetailInfoContent = styled.div`
+	margin-bottom: 5vh;
+`
+
+const DetailExperience = styled.div`
+	width: 40vw;
+	height: 105vh;
+	padding: 0vw 2.5vw;
+	text-align: left;
+	border: 2px solid black;
+	border-radius: 15px;
+	box-shadow: 10px 5px 5px black;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+	}
+	&::-webkit-scrollbar
+	{
+		width: 0.7vw;
+	}
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: #336666;
+	}
+`
+
+const Review = styled.div`
+	margin: 1vh 0;
+	padding: 2vw 0vw;
+	text-align: left;
+	border-bottom: 1px solid #408080;
+`
+
+const StarsTime = styled.div`
+	margin-bottom: 1.5vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const Time = styled.div`
+	font-size: 1vw;
+	margin-left: 2vh;
+	color: #8E8E8E;
+`
+
+const ReviewContent = styled.div`
+	font-size: 1vw;
 `
 
 function Restaurant() {
 	const place_id = window.location.pathname.split("/")[2]
 	const [info, setInfo] = useState()
 	const [reviews, setReviews] = useState()
+	const [tags, setTags] = useState()
 
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
@@ -38,27 +231,82 @@ function Restaurant() {
 			console.log(response)
 			setReviews(response.data)
 		});
+		axios.get("http://localhost:3100/api/v1/tag/" + place_id)
+		.then(function(response){
+			console.log(response)
+			setTags(response.data)
+		});
 	}, []);
+	
 
 	return (
-		<div style={{'font-family': 'Microsoft YaHei'}}>
+		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
 			<Main>
-				<Title>{info?.name}</Title>
-				<Rating>評分：{info?.rating}</Rating>
-				營業狀態：{info?.opening_hours?.open_now.toString() === 'true' ? '營業中':'休息中'}<br />
+				<MainImg src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />
+				<MainInfo>
+					<Title>{info?.name}</Title>
+					{info?.opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
+					<Ratings>
+						<Rating>
+							<RatingImg src={star} />
+							<div style={{'margin-left': '0.5vw'}}>{info?.rating}</div>
+						</Rating>
+						<Rating>
+							<RatingImg src={pencil} />
+							<div style={{'margin-left': '0.5vw'}}>{info?.user_ratings_total}</div>
+						</Rating>
+					</Ratings>
+					<Tags>
+						{tags?.map((tag) => (
+							<Tag>
+								<TagImg src={tagIcon} />
+								<div>{tag.Tag}</div>
+							</Tag>
+						))}
+					</Tags>
+				</MainInfo>
 			</Main>
-			<div style={{'display': 'flex', 'flex-direction': 'row'}}>
-				<Detail>
-					{info?.formatted_address}<br />
-					{info?.opening_hours?.weekday_text.map((day) => (<div>{day}</div>))}			
-					電話：{info?.formatted_phone_number}<br />
-					網站：{info?.website}<br />
-				</Detail>
-				{info?.photos.map((photo) => (<img width={photo.width /50} height={photo.height/50} src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + photo.photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />))}<br />
-				評分數：{info?.user_ratings_total}<br />
-			</div>
+			<Detail>
+				<DetailInfo>
+					<DetailInfoTitle>
+						<DetailInfoImg src={phone} />電話
+					</DetailInfoTitle>
+					<DetailInfoContent>{info?.formatted_phone_number ?? '無'}</DetailInfoContent>
+					<DetailInfoTitle>
+						<DetailInfoImg src={address} />地址
+					</DetailInfoTitle>
+					<DetailInfoContent>{info?.formatted_address}</DetailInfoContent>
+					<DetailInfoTitle>
+						<DetailInfoImg src={time} />營業時間
+					</DetailInfoTitle>
+					<DetailInfoContent>
+						{info?.opening_hours?.weekday_text.map((day) => (<div>{day}</div>))}
+					</DetailInfoContent>
+					<DetailInfoTitle>
+						<DetailInfoImg src={website} />網站
+					</DetailInfoTitle>
+					<DetailInfoContent>{info?.website ? <a href={info?.website}>點我前往</a>:'無'}</DetailInfoContent>
+				</DetailInfo>
+				<DetailExperience>
+					{reviews?.slice(0, 100).map((review) => (
+						<Review>
+							<StarsTime>
+								{new Array(review.Rate).fill(null).map(() => (
+									<RatingImg src={star} />
+								))}
+								<Time>{review.Time}</Time>
+							</StarsTime>
+							<ReviewContent>{review.Content}</ReviewContent>
+						</Review>
+					))}
+				</DetailExperience>
+			</Detail>
 		</div>
 	);
 }
 
 export default Restaurant;
+/* 
+{info?.photos.map((photo) => (<img width={photo.width /50} height={photo.height/50} src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + photo.photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />))}<br />
+				評分數：{info?.user_ratings_total}<br /> 
+				*/

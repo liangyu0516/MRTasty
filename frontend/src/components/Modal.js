@@ -18,8 +18,7 @@ const StyledModal = styled.div`
 `
 
 const Station = styled.div`
-	margin-top: 5vw;
-	margin-bottom: 5vw;
+	margin: 3vw 0;
 	padding: 1vw 2vw;
 	font-size: 2.7vw;
 	font-weight: 900;
@@ -31,12 +30,28 @@ const Station = styled.div`
 
 const Restaurants = styled.a`
 	width: 50vw;
-	height: 60vh;
+	height: 70vh;
 	display: flex;
 	font-family: Microsoft YaHei;
 	flex-direction: column;
 	align-items: center;
-	overflow: scroll;
+	overflow-y: scroll;
+	&::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+	}
+	&::-webkit-scrollbar
+	{
+		width: 0.7vw;
+	}
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+		background-color: #336666;
+	}
 `
 
 const Restaurant = styled.div`
@@ -48,7 +63,7 @@ const Restaurant = styled.div`
 	border-radius: 2vw;
 	border: 2px solid black;
 	box-shadow: 1px 10px 1px black;
-	background-color: #FFFFCC;
+	background-color: rgb(231, 243, 243);
 `
 
 const MainImg = styled.img`
