@@ -29,7 +29,7 @@ const MainInfo = styled.div`
 	text-align: left;
 	border: 2px solid black;
 	border-radius: 15px;
-	box-shadow: 10px 5px 5px black;
+	box-shadow: 10px 10px 3px black;
 	overflow: hidden;
 `
 
@@ -132,13 +132,13 @@ const Detail = styled.div`
 
 const DetailInfo = styled.div`
 	width: 15vw;
-	height: 100vh;
+	height: 105vh;
 	margin-right: 3vw;
 	padding: 2vw 2.5vw 0.5vw;
 	text-align: left;
 	border: 2px solid black;
 	border-radius: 15px;
-	box-shadow: 10px 5px 5px black;
+	box-shadow: 0px 5px 2px black;
 `
 
 const DetailInfoTitle = styled.div`
@@ -162,13 +162,29 @@ const DetailInfoContent = styled.div`
 `
 
 const DetailExperience = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
+const Comment = styled.div`
 	width: 40vw;
-	height: 105vh;
+	height: 27vh;
+	margin-bottom: 3vh;
 	padding: 0vw 2.5vw;
 	text-align: left;
 	border: 2px solid black;
 	border-radius: 15px;
-	box-shadow: 10px 5px 5px black;
+	box-shadow: 0px 5px 2px black;
+`
+
+const Reviews = styled.div`
+	width: 40vw;
+	height: 80vh;
+	padding: 0vw 2.5vw;
+	text-align: left;
+	border: 2px solid black;
+	border-radius: 15px;
+	box-shadow: 0px 5px 2px black;
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
@@ -288,17 +304,20 @@ function Restaurant() {
 					<DetailInfoContent>{info?.website ? <a href={info?.website}>點我前往</a>:'無'}</DetailInfoContent>
 				</DetailInfo>
 				<DetailExperience>
-					{reviews?.slice(0, 100).map((review) => (
-						<Review>
-							<StarsTime>
-								{new Array(review.Rate).fill(null).map(() => (
-									<RatingImg src={star} />
-								))}
-								<Time>{review.Time}</Time>
-							</StarsTime>
-							<ReviewContent>{review.Content}</ReviewContent>
-						</Review>
-					))}
+					<Comment>s</Comment>
+					<Reviews>
+						{reviews?.slice(0, 100).map((review) => (
+							<Review>
+								<StarsTime>
+									{new Array(review.Rate).fill(null).map(() => (
+										<RatingImg src={star} />
+									))}
+									<Time>{review.Time}</Time>
+								</StarsTime>
+								<ReviewContent>{review.Content}</ReviewContent>
+							</Review>
+						))}
+					</Reviews>
 				</DetailExperience>
 			</Detail>
 		</div>
