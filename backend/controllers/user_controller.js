@@ -13,7 +13,7 @@ const signUp = async (req, res) => {
         return res.status(403).send({error: result.error});
     }
     else {
-        return res.cookie("access_token", result.access_token, { httpOnly: true, secure: true}).status(200).send(result)
+        return res.status(200).json(result)
     }
 };
 
@@ -29,7 +29,7 @@ const signIn = async (req, res) => {
         return res.status(403).send({error: result.error});
     }
     else {
-        return res.cookie("access_token", result.access_token, { httpOnly: true}).status(200).json(result)
+        return res.status(200).json(result)
     }
 };
 

@@ -2,7 +2,9 @@
 import styled from 'styled-components'
 import logo from '../images/logo.jpg'
 import ramen from '../images/ramen.png'
+import profile from '../images/profile.png'
 import Authorization from './Authorization'
+import cookies from "js-cookies";
 
 const StyledHeader = styled.div`
 	padding: 1vh 2vw;
@@ -41,19 +43,40 @@ const TypeImg = styled.img`
 	margin-right: 0.3vw;
 `
 
+const ProfileImg = styled.img`
+	width: 2.5vw;
+	height: 2.5vw;
+`
+
 function Header(props) {
-	return (
-		<StyledHeader>
-			<Logo src={logo}/>
-			<div style={{'display': 'flex', 'flex-direction': 'row'}}>
-				<Type onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
-				<Type onClick={() => props.setType('火鍋')}>火鍋</Type>
-				<Type onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
-				<Type onClick={() => props.setType('飲料')}>飲料</Type>
-			</div>
-			<Authorization />
-		</StyledHeader>
-	);
+	if(props.token == null) {
+		return (
+			<StyledHeader>
+				<Logo src={logo}/>
+				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
+					<Type onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
+					<Type onClick={() => props.setType('火鍋')}>火鍋</Type>
+					<Type onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
+					<Type onClick={() => props.setType('飲料')}>飲料</Type>
+				</div>
+				<Authorization token={props.token} setToken={props.setToken}/>
+			</StyledHeader>
+		);
+	}
+	else {
+		return (
+			<StyledHeader>
+				<Logo src={logo}/>
+				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
+					<Type onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
+					<Type onClick={() => props.setType('火鍋')}>火鍋</Type>
+					<Type onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
+					<Type onClick={() => props.setType('飲料')}>飲料</Type>
+				</div>
+				<ProfileImg src={profile} />
+			</StyledHeader>
+		);
+	}
 }
 
 export default Header;

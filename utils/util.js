@@ -1,7 +1,8 @@
+require('dotenv').config({path: '../process.env'});
 const crypto = require('crypto');
 //const User = require('../server/models/user_model');
 const {TOKEN_SECRET} = process.env; // 30 days by seconds
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 // reference: https://thecodebarbarian.com/80-20-guide-to-express-error-handling
 const wrapAsync = (fn) => {
@@ -13,19 +14,24 @@ const wrapAsync = (fn) => {
 };
 
 const authorization = (req, res, next) => {
-    const token = req.cookies;
-    console.log('token', token)
+    var token = req.get('Authorization');
     if (!token) {
-      return res.sendStatus(403);
+      return res.status(401).send({error: 'Unauthorized'});
     }
-    try {
-      const data = jwt.verify(token, "YOUR_SECRET_KEY");
-      req.userId = data.id;
-      req.userRole = data.role;
-      return next();
-    } catch {
-      return res.sendStatus(403);
+
+    token = token.replace('Bearer ', '');
+    if (token == 'null') {
+        return res.status(401).send({error: 'Unauthorized'});
     }
+
+	try {
+		const data = jwt.verify(token, process.env.TOKEN_KEY);
+		req.Uid = data.Uid
+		return next();
+	  } catch {
+		return res.status(403).send({error: 'Forbidden'});
+	  }
+
 };
 
 module.exports = {

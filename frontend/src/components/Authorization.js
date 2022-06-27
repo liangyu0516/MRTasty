@@ -4,13 +4,17 @@ import Swal from "sweetalert2";
 import cookies from "js-cookies";
 	
 export default class Authorization extends Component {
-	constructor() {  
-		super();  
-		this.HandleClick = this.HandleClick.bind(this);  
+	constructor(props) {  
+		super();
+		this.token = props.token
+		this.setToken = props.setToken
+		this.HandleClick = this.HandleClick.bind(this);
+		this.HandleClickSignUp = this.HandleClickSignUp.bind(this.setToken);
+		this.HandleClickSignIn = this.HandleClickSignIn.bind(this.setToken);
 	}  
 	
 	HandleClick() {} 
-	HandleClickSignUp() { 
+	HandleClickSignUp(setToken) { 
 		Swal.fire({
 			title: '註冊',
 			html: `
@@ -34,6 +38,8 @@ export default class Authorization extends Component {
 
 			axios.post("http://localhost:3100/api/v1/user/signup", result.value, {withCredentials: true, credentials: 'include'})
 			.then(function(response) {
+				cookies.setItem('access_token', response.data.access_token)
+				setToken(cookies.getItem('access_token'))
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
@@ -55,7 +61,7 @@ export default class Authorization extends Component {
 			})
 		})		  
 	}
-	HandleClickSignIn() {  
+	HandleClickSignIn(setToken) {
 		Swal.fire({
 			title: '登入',
 			html: `
@@ -74,10 +80,11 @@ export default class Authorization extends Component {
 		})
 		.then((result) => {
 			if(result.dismiss === "backdrop") return;
-			console.log('cookies', cookies.getItem('access_token'))
+			
 			axios.post("http://localhost:3100/api/v1/user/signin", result.value)
 			.then(function(response) {
-				console.log(response)
+				cookies.setItem('access_token', response.data.access_token)
+				setToken(cookies.getItem('access_token'))
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
@@ -93,7 +100,7 @@ export default class Authorization extends Component {
 					position: 'top-end',
 					icon: 'error',  
 					title: '登入失敗 :<',  
-					text: error.response.data.error,
+					text: error.response?.data.error ?? error,
 					confirmButtonText: '好的'  
 				});
 			})
@@ -115,14 +122,14 @@ export default class Authorization extends Component {
 			showConfirmButton: false,  
 			timer: 1500  
 		});  
-	}   
+	}
 	
 	render() {  
 		return (  
 			<div>
 				<div style={{ "paddingTop": "10px" }}>  
-					<button class="btn btn-info btn" onClick={this.HandleClickSignUp}>Sign Up</button>  
-					<button class="btn btn-success btn" onClick={this.HandleClickSignIn}>Sign In</button>
+					<button class="btn btn-info btn" onClick={this.HandleClickSignUp(this.setToken)}>Sign Up</button>  
+					<button class="btn btn-success btn" onClick={this.HandleClickSignIn(this.setToken)}>Sign In</button>
 				</div>  
 			</div>  
 		);  

@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import star from '../images/star.png'
+import whitestar from '../images/whitestar.png'
 import pencil from '../images/pencil.png'
 import phone from '../images/phone.png'
 import address from '../images/address.png'
 import time from '../images/time.png'
 import website from '../images/website.png'
 import tagIcon from '../images/tag.png'
+import profile from '../images/profile.png'
 const axios = require('axios');
 
 const Main = styled.div`
@@ -170,17 +172,39 @@ const Comment = styled.div`
 	width: 40vw;
 	height: 27vh;
 	margin-bottom: 3vh;
-	padding: 0vw 2.5vw;
+	padding: 2vh 2.5vw;
 	text-align: left;
 	border: 2px solid black;
 	border-radius: 15px;
 	box-shadow: 0px 5px 2px black;
+	display: flex;
+	flex-direction: column;
+`
+
+const CommentProfileImg = styled.img`
+	width: 3.5vw;
+	height: 3.5vw;
+	margin-bottom: 2vh;
+`
+
+const CommentStars = styled.div`
+	margin-bottom: 1.5vh;
+	display: flex;
+	flex-direction: row;
+`
+
+const CommentContent = styled.textarea`
+	width: 100%;
+	max-width: 100%;
+	height: 10vh;
+	border: 2px solid black;
+	border-radius: 5px;
 `
 
 const Reviews = styled.div`
 	width: 40vw;
 	height: 80vh;
-	padding: 0vw 2.5vw;
+	padding: 10px 2.5vw;
 	text-align: left;
 	border: 2px solid black;
 	border-radius: 15px;
@@ -230,11 +254,12 @@ const ReviewContent = styled.div`
 	font-size: 1vw;
 `
 
-function Restaurant() {
+function Restaurant(props) {
 	const place_id = window.location.pathname.split("/")[2]
 	const [info, setInfo] = useState()
 	const [reviews, setReviews] = useState()
 	const [tags, setTags] = useState()
+	const [rate, setRate] = useState(0)
 
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
@@ -242,7 +267,9 @@ function Restaurant() {
 			console.log(response)
 			setInfo(response.data.result)
 		});
-		axios.get("http://localhost:3100/api/v1/review/" + place_id)
+		axios.get("http://localhost:3100/api/v1/review/" + place_id, {
+			headers: { Authorization: `Bearer ` + props.token }
+		})
 		.then(function(response){
 			console.log(response)
 			setReviews(response.data)
@@ -252,13 +279,16 @@ function Restaurant() {
 			console.log(response)
 			setTags(response.data)
 		});
-	}, []);
-	
+	}, [props.token]);
 
+	function handleClickOnStar(starID) {
+		setRate(starID)
+	}
+	
 	return (
 		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
 			<Main>
-				<MainImg src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />
+				<MainImg src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />
 				<MainInfo>
 					<Title>{info?.name}</Title>
 					{info?.opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
@@ -304,7 +334,15 @@ function Restaurant() {
 					<DetailInfoContent>{info?.website ? <a href={info?.website}>點我前往</a>:'無'}</DetailInfoContent>
 				</DetailInfo>
 				<DetailExperience>
-					<Comment>s</Comment>
+					<Comment>
+						<CommentProfileImg src={profile} />
+						<CommentStars>
+							{[0, 0, 0, 0, 0].fill(1, 0, rate).map((type, index) => (
+								<RatingImg src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
+							))}
+						</CommentStars>
+						<CommentContent />
+					</Comment>
 					<Reviews>
 						{reviews?.slice(0, 100).map((review) => (
 							<Review>
