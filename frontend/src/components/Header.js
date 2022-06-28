@@ -2,6 +2,9 @@
 import styled from 'styled-components'
 import logo from '../images/logo.jpg'
 import ramen from '../images/ramen.png'
+import hotpot from '../images/hotpot.png'
+import coffee from '../images/coffee.png'
+import drink from '../images/drink.png'
 import profile from '../images/profile.png'
 import Authorization from './Authorization'
 import cookies from "js-cookies";
@@ -28,6 +31,7 @@ const Type = styled.div`
 	font-weight: 500;
 	font-family: Microsoft YaHei;
 	text-align: center;
+	border: ${props => props.isSelected ? '0':'1px'} solid black;
 	border-radius: 10px;
 	background-color: ${props => props.isSelected ? '#00808C':'white'};
 	box-shadow: 3px 3px 1px black;
@@ -55,9 +59,9 @@ function Header(props) {
 				<Logo src={logo}/>
 				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
 					<Type isSelected={props.type === '拉麵' ? true:false} onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
-					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}>火鍋</Type>
-					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
-					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}>飲料</Type>
+					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}><TypeImg src={hotpot} />火鍋</Type>
+					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
+					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
 				<Authorization token={props.token} setToken={props.setToken}/>
 			</StyledHeader>
@@ -69,9 +73,9 @@ function Header(props) {
 				<Logo src={logo}/>
 				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
 					<Type isSelected={props.type === '拉麵' ? true:false} onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
-					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}>火鍋</Type>
-					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}>咖啡廳</Type>
-					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}>飲料</Type>
+					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}><TypeImg src={hotpot} />火鍋</Type>
+					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
+					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
 				<ProfileImg src={profile} />
 			</StyledHeader>

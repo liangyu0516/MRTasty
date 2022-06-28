@@ -74,6 +74,7 @@ const MainImg = styled.img`
 `
 
 const Info = styled.div`
+	width: 25vw;
 	margin-left: 1vw;
 	text-align: left;
 	display: flex;
@@ -82,7 +83,7 @@ const Info = styled.div`
 `
 const Name = styled.div`
 	margin-bottom: 1vh;
-	font-size: 1.5vw;
+	font-size: 1.3vw;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

@@ -5,16 +5,17 @@ import cookies from "js-cookies";
 	
 export default class Authorization extends Component {
 	constructor(props) {  
-		super();
+		super(props);
 		this.token = props.token
 		this.setToken = props.setToken
 		this.HandleClick = this.HandleClick.bind(this);
-		this.HandleClickSignUp = this.HandleClickSignUp.bind(this.setToken);
-		this.HandleClickSignIn = this.HandleClickSignIn.bind(this.setToken);
+		this.HandleClickSignUp = this.HandleClickSignUp.bind(this);
+		this.HandleClickSignIn = this.HandleClickSignIn.bind(this);
 	}  
 	
 	HandleClick() {} 
-	HandleClickSignUp(setToken) { 
+	HandleClickSignUp() {
+		const setToken = this.setToken
 		Swal.fire({
 			title: '註冊',
 			html: `
@@ -36,7 +37,7 @@ export default class Authorization extends Component {
 		.then((result) => {
 			if(result.dismiss === "backdrop") return;
 
-			axios.post("http://localhost:3100/api/v1/user/signup", result.value, {withCredentials: true, credentials: 'include'})
+			axios.post("http://localhost:3100/api/v1/user/signup", result.value)
 			.then(function(response) {
 				cookies.setItem('access_token', response.data.access_token)
 				setToken(cookies.getItem('access_token'))
@@ -61,7 +62,8 @@ export default class Authorization extends Component {
 			})
 		})		  
 	}
-	HandleClickSignIn(setToken) {
+	HandleClickSignIn() {
+		const setToken = this.setToken
 		Swal.fire({
 			title: '登入',
 			html: `
@@ -128,8 +130,8 @@ export default class Authorization extends Component {
 		return (  
 			<div>
 				<div style={{ "paddingTop": "10px" }}>  
-					<button class="btn btn-info btn" onClick={this.HandleClickSignUp(this.setToken)}>Sign Up</button>  
-					<button class="btn btn-success btn" onClick={this.HandleClickSignIn(this.setToken)}>Sign In</button>
+					<button class="btn btn-info btn" onClick={this.HandleClickSignUp}>Sign Up</button>  
+					<button class="btn btn-success btn" onClick={this.HandleClickSignIn}>Sign In</button>
 				</div>  
 			</div>  
 		);  

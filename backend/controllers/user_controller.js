@@ -7,7 +7,7 @@ const signUp = async (req, res) => {
     if(!username || !email || !password) {
         return res.status(400).send({error:'Request Error: name, email and password are required.'});
     }
-
+    
     const result = await User.signUp(email, username, password);
     if (result.error) {
         return res.status(403).send({error: result.error});

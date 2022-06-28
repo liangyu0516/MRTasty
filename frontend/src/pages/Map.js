@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Swal from "sweetalert2";
 const axios = require('axios');
 
 const MapTitle = styled.div`
@@ -78,13 +79,22 @@ function Map(props) {
   	const [color, setColor] = useState('white')
 
 	async function handleClickOnStation (station) {
-		props.setIsSelected(true)
-		props.setStation(station)
-		await axios.get("http://localhost:3100/api/v1/restaurant?keyword=" + props.type + "&station=" + station.english)
-		.then(function(response){
-			console.log(response)
-			props.setRestaurants(response.data)
-		});
+		if(props.type === '') {
+			Swal.fire({
+				icon: 'warning',
+				title: '請先選擇地圖主題',
+				text: '有四種主題可以選擇哦 :O',
+			  })
+		}
+		else {
+			props.setIsSelected(true)
+			props.setStation(station)
+			await axios.get("http://localhost:3100/api/v1/restaurant?keyword=" + props.type + "&station=" + station.english)
+			.then(function(response){
+				console.log(response)
+				props.setRestaurants(response.data)
+			});
+		}
 	}
 
 	return (

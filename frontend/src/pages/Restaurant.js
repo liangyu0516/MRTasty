@@ -23,10 +23,12 @@ const MainImg = styled.img`
 	width: 20vw;
 	height: 20vw;
 	border-radius: 15px;
+	box-shadow: 10px 10px 3px black;
 `
 
 const MainInfo = styled.div`
 	width: 40vw;
+	height: 18vw;
 	margin-left: 3vw;
 	padding: 1vw 2.5vw;
 	text-align: left;
@@ -38,12 +40,12 @@ const MainInfo = styled.div`
 
 const Title = styled.div`
 	margin-bottom: 3vh;
-	font-size: 3vw;
+	font-size: 2vw;
 	font-weight: bolder;
 `
 
 const Ratings = styled.div`
-	margin-bottom: 2vh;
+	margin-bottom: 1.5vh;
 	display: flex;
 	flex-direction: row;
 `
@@ -72,7 +74,7 @@ const RatingImg = styled.img`
 
 const Open = styled.div`
 	width: 5vw;
-	margin-bottom: 2vh;
+	margin-bottom: 1.5vh;
 	padding: 0.7vw 0.5vw;
 	font-size: 1vw;
 	font-weight: bolder;
