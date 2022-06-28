@@ -6,13 +6,14 @@ import Map from './pages/Map'
 import Restaurant from './pages/Restaurant'
 import Modal from './components/Modal'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import cookies from "js-cookies";
 
 function App() {
 	const [type, setType] = useState('')
 	const [station, setStation] = useState()
 	const [isSelected, setIsSelected] = useState(false)
 	const [restaurants, setRestaurants] = useState([])
-	const [token, setToken] = useState()
+	const [token, setToken] = useState(cookies.getItem('access_token'))
 
 	return (
 		<Router>

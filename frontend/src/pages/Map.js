@@ -84,7 +84,7 @@ function Map(props) {
 				icon: 'warning',
 				title: '請先選擇地圖主題',
 				text: '有四種主題可以選擇哦 :O',
-			  })
+			})
 		}
 		else {
 			props.setIsSelected(true)

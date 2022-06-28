@@ -6,6 +6,12 @@ const getNearRestaurants = async (keyword, stationID) => {
     return result[0];
 }
 
+const getRestaurantDetail = async (place_id) => {
+    const result = await pool.query("SELECT * FROM RESTAURANT WHERE Place_id = ?", [place_id])
+    return result[0][0];
+}
+
 module.exports = {
     getNearRestaurants,
+    getRestaurantDetail,
 }

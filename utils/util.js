@@ -28,9 +28,10 @@ const authorization = (req, res, next) => {
 		const data = jwt.verify(token, process.env.TOKEN_KEY);
 		req.Uid = data.Uid
 		return next();
-	  } catch {
+	}
+	catch {
 		return res.status(403).send({error: 'Forbidden'});
-	  }
+	}
 
 };
 

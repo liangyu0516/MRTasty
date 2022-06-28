@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Swal from "sweetalert2";
 import star from '../images/star.png'
 import whitestar from '../images/whitestar.png'
 import pencil from '../images/pencil.png'
@@ -173,7 +174,7 @@ const DetailExperience = styled.div`
 
 const Comment = styled.div`
 	width: 40vw;
-	height: 24vh;
+	height: 29vh;
 	margin-bottom: 3vh;
 	padding: 2vh 2.5vw;
 	text-align: left;
@@ -200,13 +201,26 @@ const CommentContent = styled.textarea`
 	width: 100%;
 	max-width: 100%;
 	height: 10vh;
+	margin-bottom: 1vh;
 	border: 2px solid black;
 	border-radius: 5px;
 `
 
+const CommentSubmit = styled.button`
+	width: 4vw;
+	padding: 1vh 0;
+	font-size: 0.8vw;
+	font-weight: 600;
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 0px 3px 1px black;
+	cursor: pointer;
+`
+
 const Reviews = styled.div`
 	width: 40vw;
-	height: 80vh;
+	height: 75vh;
 	padding: 10px 2.5vw;
 	text-align: left;
 	border: 2px solid black;
@@ -263,16 +277,15 @@ function Restaurant(props) {
 	const [reviews, setReviews] = useState()
 	const [tags, setTags] = useState()
 	const [rate, setRate] = useState(0)
+	const [comment, setComment] = useState('')
 
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
 		.then(function(response){
-			console.log(response)
-			setInfo(response.data.result)
+			console.log('info', response)
+			setInfo(response.data)
 		});
-		axios.get("http://localhost:3100/api/v1/review/" + place_id, {
-			headers: { Authorization: `Bearer ` + props.token }
-		})
+		axios.get("http://localhost:3100/api/v1/review/" + place_id)
 		.then(function(response){
 			console.log(response)
 			setReviews(response.data)
@@ -282,27 +295,48 @@ function Restaurant(props) {
 			console.log(response)
 			setTags(response.data)
 		});
-	}, [props.token]);
+	}, []);
 
 	function handleClickOnStar(starID) {
 		setRate(starID)
+	}
+
+	function handleClickOnCommentSumbit(rate, comment) {
+		if(rate === 0) {
+			Swal.fire({
+				icon: 'warning',
+				title: '請選擇星等 :O',
+			})
+		}
+		else {
+			const data = {
+				rate: rate,
+				comment: comment
+			}
+			axios.post("http://localhost:3100/api/v1/review/" + place_id, data, {
+				headers: { Authorization: `Bearer ` + props.token }
+			})
+			.then(function(response){
+				console.log(response)
+			});
+		}
 	}
 	
 	return (
 		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
 			<Main>
-				<MainImg src={info && Object.keys(info).includes("photos") ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg} />
+				<MainImg src={info?.Photo_reference !== null ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg } />
 				<MainInfo>
-					<Title>{info?.name}</Title>
-					{info?.opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
+					<Title>{info?.Name}</Title>
+					{info?.Opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
 					<Ratings>
 						<Rating>
 							<RatingImg src={star} />
-							<div style={{'margin-left': '0.5vw'}}>{info?.rating}</div>
+							<div style={{'margin-left': '0.5vw'}}>{info?.Rating}</div>
 						</Rating>
 						<Rating>
 							<RatingImg src={pencil} />
-							<div style={{'margin-left': '0.5vw'}}>{info?.user_ratings_total}</div>
+							<div style={{'margin-left': '0.5vw'}}>{info?.Total_ratings}</div>
 						</Rating>
 					</Ratings>
 					<Tags>
@@ -320,21 +354,21 @@ function Restaurant(props) {
 					<DetailInfoTitle>
 						<DetailInfoImg src={phone} />電話
 					</DetailInfoTitle>
-					<DetailInfoContent>{info?.formatted_phone_number ?? '無'}</DetailInfoContent>
+					<DetailInfoContent>{info?.Phone ?? '無'}</DetailInfoContent>
 					<DetailInfoTitle>
 						<DetailInfoImg src={address} />地址
 					</DetailInfoTitle>
-					<DetailInfoContent>{info?.formatted_address}</DetailInfoContent>
+					<DetailInfoContent>{info?.Address}</DetailInfoContent>
 					<DetailInfoTitle>
 						<DetailInfoImg src={time} />營業時間
 					</DetailInfoTitle>
 					<DetailInfoContent>
-						{info?.opening_hours?.weekday_text.map((day) => (<div>{day}</div>))}
+						{info?.Opening_hours?.weekday_text.map((day) => (<div>{day}</div>))}
 					</DetailInfoContent>
 					<DetailInfoTitle>
 						<DetailInfoImg src={website} />網站
 					</DetailInfoTitle>
-					<DetailInfoContent>{info?.website ? <a href={info?.website}>點我前往</a>:'無'}</DetailInfoContent>
+					<DetailInfoContent>{info?.Website ? <a href={info?.Website}>點我前往</a>:'無'}</DetailInfoContent>
 				</DetailInfo>
 				<DetailExperience>
 					<Comment>
@@ -344,7 +378,8 @@ function Restaurant(props) {
 								<RatingImg style={{ 'cursor': 'pointer'}} src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
 							))}
 						</CommentStars>
-						<CommentContent />
+						<CommentContent value={comment} onChange={(e) => setComment(e.target.value)} />
+						<CommentSubmit onClick={() => handleClickOnCommentSumbit(rate, comment)}>送出</CommentSubmit>
 					</Comment>
 					<Reviews>
 						{reviews?.slice(0, 100).map((review) => (
@@ -353,7 +388,7 @@ function Restaurant(props) {
 									{new Array(review.Rate).fill(null).map(() => (
 										<RatingImg src={star} />
 									))}
-									<Time>{review.Time}</Time>
+									<Time>{typeof review.Time == 'string' ? review.Time:''}</Time>
 								</StarsTime>
 								<ReviewContent>{review.Content}</ReviewContent>
 							</Review>
