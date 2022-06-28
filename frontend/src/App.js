@@ -17,7 +17,7 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-			<Header setType={setType} token={token} setToken={setToken}/>
+			<Header type={type} setType={setType} token={token} setToken={setToken}/>
 				<Routes>
 				<Route path="/" element={<Map type={type} setStation={setStation} setIsSelected={setIsSelected} setRestaurants={setRestaurants}/>} />
 				<Route path="/restaurant/:place_id" element={<Restaurant token={token}/>} />

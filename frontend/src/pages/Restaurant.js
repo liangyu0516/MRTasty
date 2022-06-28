@@ -10,6 +10,7 @@ import time from '../images/time.png'
 import website from '../images/website.png'
 import tagIcon from '../images/tag.png'
 import profile from '../images/profile.png'
+import restaurantImg from '../images/restaurant.png'
 const axios = require('axios');
 
 const Main = styled.div`
@@ -134,7 +135,7 @@ const Detail = styled.div`
 
 const DetailInfo = styled.div`
 	width: 15vw;
-	height: 105vh;
+	height: 110vh;
 	margin-right: 3vw;
 	padding: 2vw 2.5vw 0.5vw;
 	text-align: left;
@@ -170,7 +171,7 @@ const DetailExperience = styled.div`
 
 const Comment = styled.div`
 	width: 40vw;
-	height: 27vh;
+	height: 24vh;
 	margin-bottom: 3vh;
 	padding: 2vh 2.5vw;
 	text-align: left;
@@ -182,8 +183,8 @@ const Comment = styled.div`
 `
 
 const CommentProfileImg = styled.img`
-	width: 3.5vw;
-	height: 3.5vw;
+	width: 3vw;
+	height: 3vw;
 	margin-bottom: 2vh;
 `
 
@@ -288,7 +289,7 @@ function Restaurant(props) {
 	return (
 		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
 			<Main>
-				<MainImg src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />
+				<MainImg src={info && Object.keys(info).includes("photos") ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.photos[1].photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg} />
 				<MainInfo>
 					<Title>{info?.name}</Title>
 					{info?.opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
@@ -338,7 +339,7 @@ function Restaurant(props) {
 						<CommentProfileImg src={profile} />
 						<CommentStars>
 							{[0, 0, 0, 0, 0].fill(1, 0, rate).map((type, index) => (
-								<RatingImg src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
+								<RatingImg style={{ 'cursor': 'pointer'}} src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
 							))}
 						</CommentStars>
 						<CommentContent />

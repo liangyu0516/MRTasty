@@ -29,13 +29,11 @@ for s in stations:
 
 	for r in range(500, 99, -100):
 		if r == 500:
-			url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(r) + "&keyword=咖啡&language=zh-TW&key=" + GOOGLE_API_KEY
+			url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(r) + "&keyword=飲料&language=zh-TW&key=" + GOOGLE_API_KEY
 			response = requests.request("GET", url, headers = headers, data = payload)
 			for restaurant in json.loads(response.text)['results']:
 				try:
-					cur.execute("INSERT INTO RESTAURANT (Sid, Type, Distance, Place_id, Name, Rating, Total_ratings, Photo_reference) VALUES (" + str(sid) + ", '咖啡', 500, '" + restaurant['place_id'] + "', '" + restaurant['name'] + "', " + str(restaurant['rating']) + ", " + str(restaurant['user_ratings_total']) + ", '" + restaurant['photos'][0]['photo_reference'] + "')")
-				except KeyError:
-					cur.execute("INSERT INTO RESTAURANT (Sid, Type, Distance, Place_id, Name, Rating, Total_ratings) VALUES (" + str(sid) + ", '咖啡', 500, '" + restaurant['place_id'] + "', '" + restaurant['name'] + "', " + str(restaurant['rating']) + ", " + str(restaurant['user_ratings_total']) + ")")
+					cur.execute("INSERT INTO RESTAURANT (Sid, Type, Distance, Place_id, Name, Rating, Total_ratings, Photo_reference) VALUES (" + str(sid) + ", '飲料', 500, '" + restaurant['place_id'] + "', '" + restaurant['name'] + "', " + str(restaurant['rating']) + ", " + str(restaurant['user_ratings_total']) + ", '" + restaurant['photos'][0]['photo_reference'] + "')")
 				except:
 					pass
 				db.commit()
@@ -46,13 +44,13 @@ for s in stations:
 					for restaurant in json.loads(response.text)['results']:
 						try:
 							cur.execute('INSERT INTO RESTAURANT (Sid, Distance, Place_id, Name, Rating, Total_ratings, Photo_reference) VALUES (' + str(sid) + ', 500, "' + restaurant['place_id'] + '", "' + restaurant['name'] + '", ' + str(restaurant['rating']) + ', ' + str(restaurant['user_ratings_total']) + ', "' + restaurant['photos'][0]['photo_reference'] + '")')
-						except KeyError:
-							cur.execute('INSERT INTO RESTAURANT (Sid, Distance, Place_id, Name, Rating, Total_ratings) VALUES (' + str(sid) + ', 500, "' + restaurant['place_id'] + '", "' + restaurant['name'] + '", ' + str(restaurant['rating']) + ', ' + str(restaurant['user_ratings_total']) + ')')
+						except:
+							pass
 						db.commit()
 				except:
 					break
 		else:
-			url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(r) + "&keyword=咖啡&language=zh-TW&key=" + GOOGLE_API_KEY
+			url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(r) + "&keyword=飲料&language=zh-TW&key=" + GOOGLE_API_KEY
 			response = requests.request("GET", url, headers = headers, data = payload)
 			for restaurant in json.loads(response.text)['results']:
 				cur.execute("UPDATE RESTAURANT SET Distance = " + str(r) + " WHERE Sid = " + str(sid) + " and Place_id = '" + restaurant['place_id'] + "'")

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {Link} from "react-router-dom";
 import star from '../images/star.png'
 import foot from '../images/foot.png'
+import restaurantImg from '../images/restaurant.png'
 
 const StyledModal = styled.div`
 	background-color: rgba(0,0,0,0.5);
@@ -69,6 +70,7 @@ const Restaurant = styled.div`
 const MainImg = styled.img`
 	width: 7vw;
 	height: 7vw;
+	overflow: hidden;
 `
 
 const Info = styled.div`
@@ -134,7 +136,7 @@ class Modal extends React.Component {
 					{this.props.restaurants?.map((restaurant) => (
 						<Link to={'/restaurant/' + restaurant.Place_id} style={{ textDecoration: 'none', color: 'black' }}>
 							<Restaurant key={restaurant.name} >
-								<MainImg src={restaurant.Photo_reference !== undefined ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + restaurant.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':''}/>
+								<MainImg src={restaurant.Photo_reference !== null ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + restaurant.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg }/>
 								<Info>
 									<Name>
 										{restaurant.Name}

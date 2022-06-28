@@ -1,7 +1,6 @@
 /* eslint-disable no-useless-escape */
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import restaurantImg from '../images/restaurant.png'
 const axios = require('axios');
 
 const MapTitle = styled.div`
