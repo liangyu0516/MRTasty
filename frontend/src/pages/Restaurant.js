@@ -278,6 +278,7 @@ function Restaurant(props) {
 	const [tags, setTags] = useState()
 	const [rate, setRate] = useState(0)
 	const [comment, setComment] = useState('')
+	const [rerender, setRerender] = useState(0)
 
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
@@ -295,7 +296,7 @@ function Restaurant(props) {
 			console.log(response)
 			setTags(response.data)
 		});
-	}, []);
+	}, [rerender]);
 
 	function handleClickOnStar(starID) {
 		setRate(starID)
@@ -318,6 +319,9 @@ function Restaurant(props) {
 			})
 			.then(function(response){
 				console.log(response)
+				setRate(0)
+				setComment('')
+				setRerender(rerender + 1)
 			});
 		}
 	}

@@ -2,7 +2,7 @@ require('dotenv').config({path: '../../process.env'});
 const {pool} = require('../../utils/mysqlcon')
 
 const getReviews = async (place_id) => {
-    const result = await pool.query("SELECT REVIEW.* FROM REVIEW, RESTAURANT WHERE RESTAURANT.Place_id = '" + place_id + "' and REVIEW.Rid = RESTAURANT.Rid")
+    const result = await pool.query("SELECT REVIEW.* FROM REVIEW, RESTAURANT WHERE RESTAURANT.Place_id = '" + place_id + "' and REVIEW.Rid = RESTAURANT.Rid ORDER BY REVIEW.REid DESC")
     return result[0]
 }
 
@@ -21,7 +21,8 @@ const addReview = async (place_id, userID, rate, comment) => {
     
     // Update rating and total rate in Restaurant table
     const countResult = await pool.query("SELECT COUNT(REVIEW.REid) FROM REVIEW, RESTAURANT WHERE RESTAURANT.Place_id = '" + place_id + "' and REVIEW.Rid = RESTAURANT.Rid")
-    console.log(countResult[0][0]['COUNT(REVIEW.REid)'])
+    const rateResult = await pool.query("SELECT AVG(REVIEW.Rate) FROM REVIEW, RESTAURANT WHERE RESTAURANT.Place_id = '" + place_id + "' and REVIEW.Rid = RESTAURANT.Rid")
+    const updateResult = await pool.query("UPDATE RESTAURANT SET Rating = ?, Total_ratings = ? WHERE Place_id = ?", [parseFloat(rateResult[0][0]['AVG(REVIEW.Rate)']).toFixed(1), parseInt(countResult[0][0]['COUNT(REVIEW.REid)']), place_id])
     return insertResult[0].insertId
 }
 
