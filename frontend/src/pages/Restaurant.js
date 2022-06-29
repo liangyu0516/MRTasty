@@ -297,6 +297,18 @@ function Restaurant(props) {
 	const [rerender, setRerender] = useState(0)
 
 	useEffect(() => {
+		axios.get("http://localhost:3100/api/v1/collect/" + place_id, {
+				headers: { Authorization: `Bearer ` + props.token }
+			})
+			.then(function(response) {
+				if(response.data.isCollected) { setIsCollected(true) } else { setIsCollected(false) }
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}, [])
+
+	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
 		.then(function(response){
 			console.log(response)
@@ -315,7 +327,21 @@ function Restaurant(props) {
 	}, [rerender]);
 
 	function handleCollect() {
-		if(isCollected) { setIsCollected(false) } else { setIsCollected(true) }
+		if(isCollected) {
+			setIsCollected(false)
+		} 
+		else {
+			setIsCollected(true)
+			axios.post("http://localhost:3100/api/v1/collect", { place_id: place_id }, {
+				headers: { Authorization: `Bearer ` + props.token }
+			})
+			.then(function(response) {
+				console.log(response)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+		}
 	}
 
 	function handleClickOnStar(starID) {
