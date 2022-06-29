@@ -12,6 +12,7 @@ import website from '../images/website.png'
 import tagIcon from '../images/tag.png'
 import profile from '../images/profile.png'
 import uncollect from '../images/uncollect.png'
+import collect from '../images/collect.png'
 import restaurantImg from '../images/restaurant.png'
 const axios = require('axios');
 
@@ -292,6 +293,7 @@ function Restaurant(props) {
 	const [tags, setTags] = useState()
 	const [rate, setRate] = useState(0)
 	const [comment, setComment] = useState('')
+	const [isCollected , setIsCollected] = useState(false)
 	const [rerender, setRerender] = useState(0)
 
 	useEffect(() => {
@@ -311,6 +313,10 @@ function Restaurant(props) {
 			setTags(response.data)
 		});
 	}, [rerender]);
+
+	function handleCollect() {
+		if(isCollected) { setIsCollected(false) } else { setIsCollected(true) }
+	}
 
 	function handleClickOnStar(starID) {
 		setRate(starID)
@@ -353,7 +359,7 @@ function Restaurant(props) {
 				<MainInfo>
 					<Title>
 						<TitleName>{info?.Name}</TitleName>
-						<CollectImg src={uncollect} />
+						<CollectImg src={isCollected ? collect:uncollect} onClick={() => handleCollect()}/>
 					</Title>
 					{info?.Opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
 					<Ratings>

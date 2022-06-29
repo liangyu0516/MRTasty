@@ -74,7 +74,7 @@ function Header(props) {
 					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
-				<Authorization token={props.token} setToken={props.setToken} setUsername={props.setUsername}/>
+				<Authorization token={props.token} setToken={props.setToken}/>
 			</StyledHeader>
 		);
 	}
@@ -91,7 +91,7 @@ function Header(props) {
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
 				<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
-					<ProfileName>陳亮瑜</ProfileName>
+					<ProfileName>{window.localStorage.getItem('username')}</ProfileName>
 					<ProfileImg src={profile} />
 				</div>
 			</StyledHeader>

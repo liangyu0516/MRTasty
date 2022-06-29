@@ -21,7 +21,6 @@ export default class Authorization extends Component {
 		super(props);
 		this.token = props.token
 		this.setToken = props.setToken
-		this.setUsername = props.setUsername
 		this.HandleClick = this.HandleClick.bind(this);
 		this.HandleClickSignUp = this.HandleClickSignUp.bind(this);
 		this.HandleClickSignIn = this.HandleClickSignIn.bind(this);
@@ -30,7 +29,6 @@ export default class Authorization extends Component {
 	HandleClick() {} 
 	HandleClickSignUp() {
 		const setToken = this.setToken
-		const setUsername = this.setUsername
 		Swal.fire({
 			title: '註冊',
 			html: `
@@ -56,7 +54,7 @@ export default class Authorization extends Component {
 			.then(function(response) {
 				Cookies.set('access_token', response.data.access_token)
 				setToken(Cookies.get('access_token'))
-				setUsername(response.data.username)
+				window.localStorage.setItem('username', response.data.username)
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
@@ -80,7 +78,6 @@ export default class Authorization extends Component {
 	}
 	HandleClickSignIn() {
 		const setToken = this.setToken
-		const setUsername = this.setUsername
 		Swal.fire({
 			title: '登入',
 			html: `
@@ -104,7 +101,7 @@ export default class Authorization extends Component {
 			.then(function(response) {
 				Cookies.set('access_token', response.data.access_token, { expires: 1 / 8 })
 				setToken(Cookies.get('access_token'))
-				setUsername(response.data.username)
+				window.localStorage.setItem('username', response.data.username)
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
