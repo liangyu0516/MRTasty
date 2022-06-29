@@ -329,6 +329,15 @@ function Restaurant(props) {
 	function handleCollect() {
 		if(isCollected) {
 			setIsCollected(false)
+			axios.delete("http://localhost:3100/api/v1/collect/" + place_id, {
+				headers: { Authorization: `Bearer ` + props.token }
+			})
+			.then(function(response) {
+				console.log(response)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 		} 
 		else {
 			setIsCollected(true)

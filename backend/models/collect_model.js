@@ -15,7 +15,13 @@ const checkCollect = async (userID, place_id) => {
     }
 }
 
+const deleteCollect = async (userID, place_id) => {
+    const deleteResult = await pool.query("DELETE FROM COLLECT WHERE Uid = ? and Place_id = ?", [userID, place_id])
+    return 'success'
+}
+
 module.exports = {
     addCollect,
     checkCollect,
+    deleteCollect,
 }
