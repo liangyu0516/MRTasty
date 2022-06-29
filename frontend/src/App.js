@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import cookies from "js-cookies";
 
 function App() {
+	const [username, setUsername] = useState('')
 	const [type, setType] = useState('')
 	const [station, setStation] = useState()
 	const [isSelected, setIsSelected] = useState(false)
@@ -18,10 +19,10 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-			<Header type={type} setType={setType} token={token} setToken={setToken}/>
+			<Header type={type} setType={setType} token={token} setToken={setToken} setUsername={setUsername}/>
 				<Routes>
-				<Route path="/" element={<Map type={type} setStation={setStation} setIsSelected={setIsSelected} setRestaurants={setRestaurants}/>} />
-				<Route path="/restaurant/:place_id" element={<Restaurant token={token}/>} />
+					<Route path="/" element={<Map type={type} setStation={setStation} setIsSelected={setIsSelected} setRestaurants={setRestaurants}/>} />
+					<Route path="/restaurant/:place_id" element={<Restaurant token={token} username={username}/>} />
 				</Routes>
 			</div>
 			{isSelected && <Modal station={station} setIsSelected={setIsSelected} restaurants={restaurants}/>}

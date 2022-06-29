@@ -1,13 +1,27 @@
 import axios from "axios";
-import React, { Component } from "react";  
+import React, { Component } from "react"; 
+import styled from 'styled-components'
 import Swal from "sweetalert2";
-import cookies from "js-cookies";
+import Cookies from "js-cookie";
+
+const Button = styled.button`
+	padding: 0.8vw 0.8vw;
+	font-size: 0.9vw;
+	font-weight: 600;
+	color: white;
+	background-color: #00808C;
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 0px 3px 1px black;
+	cursor: pointer;
+`
 	
 export default class Authorization extends Component {
 	constructor(props) {  
 		super(props);
 		this.token = props.token
 		this.setToken = props.setToken
+		this.setUsername = props.setUsername
 		this.HandleClick = this.HandleClick.bind(this);
 		this.HandleClickSignUp = this.HandleClickSignUp.bind(this);
 		this.HandleClickSignIn = this.HandleClickSignIn.bind(this);
@@ -16,6 +30,7 @@ export default class Authorization extends Component {
 	HandleClick() {} 
 	HandleClickSignUp() {
 		const setToken = this.setToken
+		const setUsername = this.setUsername
 		Swal.fire({
 			title: '註冊',
 			html: `
@@ -39,8 +54,9 @@ export default class Authorization extends Component {
 
 			axios.post("http://localhost:3100/api/v1/user/signup", result.value)
 			.then(function(response) {
-				cookies.setItem('access_token', response.data.access_token)
-				setToken(cookies.getItem('access_token'))
+				Cookies.set('access_token', response.data.access_token)
+				setToken(Cookies.get('access_token'))
+				setUsername(response.data.username)
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
@@ -64,6 +80,7 @@ export default class Authorization extends Component {
 	}
 	HandleClickSignIn() {
 		const setToken = this.setToken
+		const setUsername = this.setUsername
 		Swal.fire({
 			title: '登入',
 			html: `
@@ -85,8 +102,9 @@ export default class Authorization extends Component {
 			
 			axios.post("http://localhost:3100/api/v1/user/signin", result.value)
 			.then(function(response) {
-				cookies.setItem('access_token', response.data.access_token)
-				setToken(cookies.getItem('access_token'))
+				Cookies.set('access_token', response.data.access_token, { expires: 1 / 8 })
+				setToken(Cookies.get('access_token'))
+				setUsername(response.data.username)
 				if(response.status === 200) {
 					Swal.fire({  
 						position: 'top-end',  
@@ -108,31 +126,12 @@ export default class Authorization extends Component {
 			})
 		})  
 	}  
-	HandleClick12() {  
-		Swal.fire({  
-			icon: 'error',  
-			title: 'Oops...',  
-			text: 'Something went wrong!',  
-			footer: '<a href>Why do I have this issue?</a>'  
-		});  
-	}  
-	HandleClicktop() {  
-		Swal.fire({  
-			position: 'top-end',  
-			icon: 'success',  
-			title: 'Your work has been saved',  
-			showConfirmButton: false,  
-			timer: 1500  
-		});  
-	}
 	
-	render() {  
+	render() {
 		return (  
-			<div>
-				<div style={{ "paddingTop": "10px" }}>  
-					<button class="btn btn-info btn" onClick={this.HandleClickSignUp}>Sign Up</button>  
-					<button class="btn btn-success btn" onClick={this.HandleClickSignIn}>Sign In</button>
-				</div>  
+			<div style={{'display': 'flex', 'flex-direction': 'row', 'justify-content': 'space-between', 'width': '11vw'}}>
+				<Button class="btn btn-info btn" onClick={this.HandleClickSignUp}>Sign Up</Button>  
+				<Button class="btn btn-success btn" onClick={this.HandleClickSignIn}>Sign In</Button>
 			</div>  
 		);  
 	}  

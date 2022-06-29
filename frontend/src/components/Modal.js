@@ -143,7 +143,7 @@ class Modal extends React.Component {
 										{restaurant.Name}
 									</Name>
 									<Stars>
-										{new Array(restaurant.Rating).fill(null).map(() => (
+										{new Array(Math.round(restaurant.Rating)).fill(null).map(() => (
 											<StarImg src={star} />
 										))}
 									</Stars>

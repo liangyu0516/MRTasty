@@ -7,7 +7,7 @@ import coffee from '../images/coffee.png'
 import drink from '../images/drink.png'
 import profile from '../images/profile.png'
 import Authorization from './Authorization'
-import cookies from "js-cookies";
+import { Link } from "react-router-dom";
 
 const StyledHeader = styled.div`
 	padding: 1vh 2vw;
@@ -39,12 +39,21 @@ const Type = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	:active {
+		box-shadow: 1px -3px 1px black;
+	}
 `
 
 const TypeImg = styled.img`
 	width: 2vw;
 	height: 2vw;
 	margin-right: 0.3vw;
+`
+
+const ProfileName = styled.div`
+	margin-right: 1vw;
+	font-size: 1.2vw;
+	font-weight: 600;
 `
 
 const ProfileImg = styled.img`
@@ -56,28 +65,35 @@ function Header(props) {
 	if(props.token == null) {
 		return (
 			<StyledHeader>
-				<Logo src={logo}/>
+				<Link to="/">
+					<Logo src={logo}/>
+				</Link>
 				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
 					<Type isSelected={props.type === '拉麵' ? true:false} onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
 					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}><TypeImg src={hotpot} />火鍋</Type>
 					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
-				<Authorization token={props.token} setToken={props.setToken}/>
+				<Authorization token={props.token} setToken={props.setToken} setUsername={props.setUsername}/>
 			</StyledHeader>
 		);
 	}
 	else {
 		return (
 			<StyledHeader>
-				<Logo src={logo}/>
+				<Link to="/">
+					<Logo src={logo}/>
+				</Link>
 				<div style={{'display': 'flex', 'flex-direction': 'row'}}>
 					<Type isSelected={props.type === '拉麵' ? true:false} onClick={() => props.setType('拉麵')} ><TypeImg src={ramen} />拉麵</Type>
 					<Type isSelected={props.type === '火鍋' ? true:false} onClick={() => props.setType('火鍋')}><TypeImg src={hotpot} />火鍋</Type>
 					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
-				<ProfileImg src={profile} />
+				<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
+					<ProfileName>陳亮瑜</ProfileName>
+					<ProfileImg src={profile} />
+				</div>
 			</StyledHeader>
 		);
 	}

@@ -23,7 +23,7 @@ const signUp = async (email, username, password) => {
                 expiresIn: "3h"
             }
         );
-        return {access_token: token}
+        return {access_token: token, username: username}
     }
 }
 
@@ -50,7 +50,7 @@ const signIn = async (email, password) => {
                     expiresIn: "3h"
                 }
             );
-            return {access_token: token}
+            return {access_token: token, username: user[0][0].Username}
         }
     }
 }

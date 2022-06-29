@@ -11,6 +11,7 @@ import time from '../images/time.png'
 import website from '../images/website.png'
 import tagIcon from '../images/tag.png'
 import profile from '../images/profile.png'
+import uncollect from '../images/uncollect.png'
 import restaurantImg from '../images/restaurant.png'
 const axios = require('axios');
 
@@ -41,8 +42,21 @@ const MainInfo = styled.div`
 
 const Title = styled.div`
 	margin-bottom: 3vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`
+
+const TitleName = styled.div`
+	margin-right: 1vw;
 	font-size: 2vw;
 	font-weight: bolder;
+`
+
+const CollectImg = styled.img`
+	width: 1.8vw;
+	height: 1.8vw;
+	cursor: pointer;
 `
 
 const Ratings = styled.div`
@@ -61,7 +75,7 @@ const Rating = styled.div`
 	border: 1px solid black;
 	border-radius: 10px;
 	box-shadow: 0px 2px 1px black;
-	background-color: 	#FFFFAA;
+	background-color: #FFFFAA;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -283,7 +297,7 @@ function Restaurant(props) {
 	useEffect(() => {
 		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
 		.then(function(response){
-			console.log('info', response)
+			console.log(response)
 			setInfo(response.data)
 		});
 		axios.get("http://localhost:3100/api/v1/review/" + place_id)
@@ -322,6 +336,12 @@ function Restaurant(props) {
 				setRate(0)
 				setComment('')
 				setRerender(rerender + 1)
+			})
+			.catch(function(error) {
+				Swal.fire({
+					icon: 'warning',
+					title: '請先登入 :O',
+				})
 			});
 		}
 	}
@@ -331,7 +351,10 @@ function Restaurant(props) {
 			<Main>
 				<MainImg src={info?.Photo_reference !== null ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg } />
 				<MainInfo>
-					<Title>{info?.Name}</Title>
+					<Title>
+						<TitleName>{info?.Name}</TitleName>
+						<CollectImg src={uncollect} />
+					</Title>
 					{info?.Opening_hours?.open_now.toString() === 'true' ? <Open>營業中</Open>:<Close>休息中</Close>}
 					<Ratings>
 						<Rating>
