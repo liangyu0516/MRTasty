@@ -40,7 +40,7 @@ const Type = styled.div`
 	flex-direction: row;
 	align-items: center;
 	:active {
-		box-shadow: 1px -3px 1px black;
+		box-shadow: 0px 0px 1px black;
 	}
 `
 

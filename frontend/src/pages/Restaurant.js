@@ -328,11 +328,11 @@ function Restaurant(props) {
 
 	function handleCollect() {
 		if(isCollected) {
-			setIsCollected(false)
 			axios.delete("http://localhost:3100/api/v1/collect/" + place_id, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
+				setIsCollected(false)
 				console.log(response)
 			})
 			.catch((error) => {
@@ -340,15 +340,19 @@ function Restaurant(props) {
 			})
 		} 
 		else {
-			setIsCollected(true)
 			axios.post("http://localhost:3100/api/v1/collect", { place_id: place_id }, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
+				setIsCollected(true)
 				console.log(response)
 			})
 			.catch((error) => {
 				console.log(error)
+				Swal.fire({
+					icon: 'warning',
+					title: '登入才可以收藏哦 :O',
+				})
 			})
 		}
 	}

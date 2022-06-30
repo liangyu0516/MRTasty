@@ -14,6 +14,9 @@ const Button = styled.button`
 	border-radius: 10px;
 	box-shadow: 0px 3px 1px black;
 	cursor: pointer;
+	:active {
+		box-shadow: 0px 0px 1px black;
+	}
 `
 	
 export default class Authorization extends Component {
