@@ -473,7 +473,3 @@ function Restaurant(props) {
 }
 
 export default Restaurant;
-/* 
-{info?.photos.map((photo) => (<img width={photo.width /50} height={photo.height/50} src={'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photo_reference=' + photo.photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY'} />))}<br />
-				評分數：{info?.user_ratings_total}<br /> 
-				*/

@@ -90,10 +90,12 @@ function Header(props) {
 					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
-				<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
-					<ProfileName>{window.localStorage.getItem('username')}</ProfileName>
-					<ProfileImg src={profile} />
-				</div>
+				<Link to="/profile" style={{ 'color': 'black', 'textDecoration': 'none' }}>
+					<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
+						<ProfileName>{window.localStorage.getItem('username')}</ProfileName>
+						<ProfileImg src={profile} />
+					</div>
+				</Link>
 			</StyledHeader>
 		);
 	}

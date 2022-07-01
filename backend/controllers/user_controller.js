@@ -33,7 +33,20 @@ const signIn = async (req, res) => {
     }
 };
 
+const getProfile = async (req, res) => {
+    const userID = req.Uid
+
+    const result = await User.getProfile(userID);
+    if (result.error) {
+        return res.status(403).send({error: result.error});
+    }
+    else {
+        return res.status(200).json(result)
+    }
+};
+
 module.exports = {
 	signUp,
     signIn,
+    getProfile,
 };

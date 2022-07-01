@@ -55,7 +55,13 @@ const signIn = async (email, password) => {
     }
 }
 
+const getProfile = async (userID) => {
+    const user = await pool.query("SELECT Uid, Email, Username FROM USER WHERE Uid = ?", [userID])
+    return user[0][0]
+}
+
 module.exports = {
     signUp,
     signIn,
+    getProfile,
 }

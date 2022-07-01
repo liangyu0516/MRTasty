@@ -1,5 +1,10 @@
 const {pool} = require('../../utils/mysqlcon')
 
+const getCollect = async (userID) => {
+    const collects = await pool.query("SELECT * FROM COLLECT WHERE Uid = ?", [userID])
+    return collects[0]
+}
+
 const addCollect = async (userID, place_id) => {
     const insertResult = await pool.query("INSERT INTO COLLECT (Uid, Place_id) VALUES(?, ?)", [userID, place_id])
     return insertResult[0].insertId
@@ -21,6 +26,7 @@ const deleteCollect = async (userID, place_id) => {
 }
 
 module.exports = {
+    getCollect,
     addCollect,
     checkCollect,
     deleteCollect,
