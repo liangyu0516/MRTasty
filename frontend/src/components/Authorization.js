@@ -5,15 +5,19 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
 const Button = styled.button`
-	padding: 0.8vw 0.8vw;
-	font-size: 0.9vw;
+	padding: 0.7vw 1.2vw;
+	font-size: 1.2vw;
 	font-weight: 600;
+	letter-spacing: 0.1vw;
 	color: white;
 	background-color: #00808C;
 	border: 2px solid black;
 	border-radius: 10px;
 	box-shadow: 0px 3px 1px black;
 	cursor: pointer;
+	:hover {
+		background-color: #00B2C2;
+	}
 	:active {
 		box-shadow: 0px 0px 1px black;
 	}
@@ -129,9 +133,9 @@ export default class Authorization extends Component {
 	
 	render() {
 		return (  
-			<div style={{'display': 'flex', 'flex-direction': 'row', 'justify-content': 'space-between', 'width': '11vw'}}>
-				<Button class="btn btn-info btn" onClick={this.HandleClickSignUp}>Sign Up</Button>  
-				<Button class="btn btn-success btn" onClick={this.HandleClickSignIn}>Sign In</Button>
+			<div style={{'display': 'flex', 'flex-direction': 'row', 'justify-content': 'space-between', 'width': '12vw'}}>
+				<Button class="btn btn-info btn" onClick={this.HandleClickSignUp}>註冊</Button>  
+				<Button class="btn btn-success btn" onClick={this.HandleClickSignIn}>登入</Button>
 			</div>  
 		);  
 	}  
