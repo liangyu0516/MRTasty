@@ -11,7 +11,6 @@ const Title = styled.div`
 	font-size: 3vw;
 	margin-bottom: 3vh;
 	letter-spacing: 0.5vw;
-	border-bottom: 2px solid black;
 `
 
 const StyledProfile = styled.div`
@@ -19,10 +18,9 @@ const StyledProfile = styled.div`
 	margin-bottom: 5vh;
 	padding: 1vw 5vw;
 	text-align: left;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 10px 10px 3px black;
-	background-color: white;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: rgb(245, 250, 250);
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -67,16 +65,19 @@ const Collects = styled.div`
 
 const Collect = styled.div`
 	width: 17.2vw;
+	height: 25vh;
 	margin: 0 2vw 3vh 0;
-	padding: 1.2vh 1vw;
-	background-color: #F0F0F0;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 0px 3px 1px black;
+	padding: 3vh 1.1vw;
+	background-color: rgb(245, 250, 250);
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `
 
 const CollectInfo = styled.div`
-	margin-bottom: 1vh;
+
 	font-weight: 600;
 	display: flex;
 	flex-direction: row;
@@ -97,6 +98,11 @@ const CollectTitle = styled.div`
 const CollectTitleIcon = styled.img`
 	width: 1.5vw;
 	height: 1.5vw;
+`
+
+const CollectContent = styled.div`
+	width: 11vw;
+	text-align: left;
 `
 
 function Profile(props) {
@@ -126,7 +132,7 @@ function Profile(props) {
 		})
 	}, [])
 	return (
-		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)', 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center'}}>
+		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center'}}>
 			<Title>會員資料</Title>
 			<StyledProfile>
 				<ProfileImg src={profileImg}/>
@@ -152,7 +158,7 @@ function Profile(props) {
 						<Collect>
 							<CollectInfo>
 								<CollectTitle style={{ 'background-color': '#336666', 'word-break': 'break-all'}}>店名</CollectTitle>
-								<div>{collect.Name}</div>
+								<CollectContent>{collect.Name}</CollectContent>
 							</CollectInfo>
 							<CollectInfo>
 								<CollectTitle style={{ 'background-color': '#4F9D9D'}}>類別</CollectTitle>

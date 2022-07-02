@@ -25,8 +25,8 @@ const Main = styled.div`
 const MainImg = styled.img`
 	width: 20vw;
 	height: 20vw;
-	border-radius: 15px;
-	box-shadow: 10px 10px 3px black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `
 
 const MainInfo = styled.div`
@@ -35,9 +35,10 @@ const MainInfo = styled.div`
 	margin-left: 3vw;
 	padding: 1vw 2.5vw;
 	text-align: left;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 10px 10px 3px black;
+	border: 0.1px solid black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: rgb(231, 243, 243);
 	overflow: hidden;
 `
 
@@ -157,9 +158,10 @@ const DetailInfo = styled.div`
 	margin-right: 3vw;
 	padding: 2vw 2.5vw 0.5vw;
 	text-align: left;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 0px 5px 2px black;
+	border: 0.1px solid black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: rgb(231, 243, 243);
 `
 
 const DetailInfoTitle = styled.div`
@@ -193,9 +195,10 @@ const Comment = styled.div`
 	margin-bottom: 3vh;
 	padding: 2vh 2.5vw;
 	text-align: left;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 0px 5px 2px black;
+	border: 0.1px solid black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: rgb(231, 243, 243);
 	display: flex;
 	flex-direction: column;
 `
@@ -238,9 +241,10 @@ const Reviews = styled.div`
 	height: 75vh;
 	padding: 10px 2.5vw;
 	text-align: left;
-	border: 2px solid black;
-	border-radius: 15px;
-	box-shadow: 0px 5px 2px black;
+	border: 0.1px solid black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: rgb(231, 243, 243);
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
@@ -392,7 +396,7 @@ function Restaurant(props) {
 	}
 	
 	return (
-		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
+		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei'}}>
 			<Main>
 				<MainImg src={info?.Photo_reference !== null ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg } />
 				<MainInfo>
@@ -454,7 +458,7 @@ function Restaurant(props) {
 						<CommentSubmit onClick={() => handleClickOnCommentSumbit(rate, comment)}>送出</CommentSubmit>
 					</Comment>
 					<Reviews>
-						{reviews?.slice(0, 100).map((review) => (
+						{!reviews || reviews.length === 0 ? '目前尚未有評論，快來寫下你的感想吧！':reviews.slice(0, 100).map((review) => (
 							<Review>
 								<StarsTime>
 									{new Array(review.Rate).fill(null).map(() => (

@@ -5,9 +5,8 @@ import Swal from "sweetalert2";
 const axios = require('axios');
 
 const MapTitle = styled.div`
-	margin: 10px 0;
+	margin: 2vh 0;
 	letter-spacing: 0.5vw;
-	padding: 1vw;
 	color: black;
 	font-family: Microsoft YaHei;
 	font-size: 2.7vw;
@@ -15,8 +14,8 @@ const MapTitle = styled.div`
 `
 
 const MapContainer = styled.div`
-	width: 90vw;
-	height: 73vh;
+	width: 95vw;
+	height: 77vh;
 	border: 1px solid black;
 	border-radius: 10px;
 	overflow: scroll;
@@ -40,7 +39,6 @@ const MapContainer = styled.div`
 `
 
 const RStation = styled.g`
-	font-size: 15;
 	cursor: pointer;
 	&:hover #childRect {
 		color: white;
@@ -106,7 +104,7 @@ function Map(props) {
 						<path strokeLinejoin="round" strokeLinecap="round" fill='none' d="M450 1950 L450 1268 Q455,1223 500 1218 L1295 1218 Q1340,1213 1345,1168 L1345 980" stroke="blue" strokeWidth="10" />
 						<path strokeLinejoin="round" strokeLinecap="round" fill='none' d="M1345 980 L1345 745 Q1340 700 1295 695 L950 695 Q905,700 900,745 L900 1470 Q905,1515 950,1520 L 1100 1520" stroke="#DB8F00" strokeWidth="10" />
 						<RStation id='Tamsui' onClick={() => handleClickOnStation({'english': 'Tamsui', 'chinese': '淡水'})}>
-							<rect id='childRect' x="150" y="50" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2"  filter='drop-shadow(3px 3px 1px black)' />
+							<rect id='childRect' x="150" y="50" rx="5" ry="5" width="35" height="35" fill={color} stroke="red" strokeWidth="2" />
 							<text id='childText' x="162" y="67" font-family="Montserrat, sans-serif" fill="black">R</text>
 							<text id='childText' x="159" y="81" font-family="Montserrat, sans-serif" fill="black">28</text>
 							<text x="110" y="65" font-family="Microsoft YaHei" fill="black">淡水</text>

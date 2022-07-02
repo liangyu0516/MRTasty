@@ -19,7 +19,7 @@ const StyledModal = styled.div`
 `
 
 const Station = styled.div`
-	margin: 3vw 0;
+	margin: 2.5vw 0;
 	padding: 1vw 2vw;
 	font-size: 2.7vw;
 	font-weight: 900;
@@ -31,7 +31,7 @@ const Station = styled.div`
 
 const Restaurants = styled.a`
 	width: 50vw;
-	height: 70vh;
+	height: 67vh;
 	display: flex;
 	font-family: Microsoft YaHei;
 	flex-direction: column;
@@ -58,13 +58,12 @@ const Restaurants = styled.a`
 const Restaurant = styled.div`
 	margin-bottom: 2vh;
 	padding: 3vh;
-	width: 35vw;
+	width: 30vw;
 	display: flex;
 	flex-direction: row;
-	border-radius: 2vw;
-	border: 2px solid black;
-	box-shadow: 1px 10px 1px black;
-	background-color: rgb(231, 243, 243);
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: white;
 `
 
 const MainImg = styled.img`
@@ -74,7 +73,6 @@ const MainImg = styled.img`
 `
 
 const Info = styled.div`
-	width: 25vw;
 	margin-left: 1vw;
 	text-align: left;
 	display: flex;
