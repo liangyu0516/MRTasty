@@ -110,7 +110,7 @@ function Profile(props) {
 	const [collects, setCollects] = useState()
 
 	useEffect(() => {
-		axios.get("http://localhost:3100/api/v1/user/profile", {
+		axios.get("http://184.169.138.82:3100/api/v1/user/profile", {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
@@ -120,7 +120,7 @@ function Profile(props) {
 			.catch((error) => {
 				console.log(error)
 			})
-		axios.get("http://localhost:3100/api/v1/collect", {
+		axios.get("http://184.169.138.82:3100/api/v1/collect", {
 			headers: { Authorization: `Bearer ` + props.token }
 		})
 		.then(function(response) {

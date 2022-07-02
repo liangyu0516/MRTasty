@@ -111,7 +111,7 @@ function Map(props) {
 		else {
 			props.setIsSelected(true)
 			props.setStation(station)
-			await axios.get("http://localhost:3100/api/v1/restaurant?keyword=" + props.type + "&station=" + station.english)
+			await axios.get("http://184.169.138.82:3100/api/v1/restaurant?keyword=" + props.type + "&station=" + station.english)
 			.then(function(response){
 				console.log(response)
 				props.setRestaurants(response.data)

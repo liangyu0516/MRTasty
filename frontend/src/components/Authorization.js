@@ -57,7 +57,7 @@ export default class Authorization extends Component {
 		.then((result) => {
 			if(result.dismiss === "backdrop") return;
 
-			axios.post("http://localhost:3100/api/v1/user/signup", result.value)
+			axios.post("http://184.169.138.82:3100/api/v1/user/signup", result.value)
 			.then(function(response) {
 				Cookies.set('access_token', response.data.access_token)
 				setToken(Cookies.get('access_token'))
@@ -104,7 +104,7 @@ export default class Authorization extends Component {
 		.then((result) => {
 			if(result.dismiss === "backdrop") return;
 			
-			axios.post("http://localhost:3100/api/v1/user/signin", result.value)
+			axios.post("http://184.169.138.82:3100/api/v1/user/signin", result.value)
 			.then(function(response) {
 				Cookies.set('access_token', response.data.access_token, { expires: 1 / 8 })
 				setToken(Cookies.get('access_token'))

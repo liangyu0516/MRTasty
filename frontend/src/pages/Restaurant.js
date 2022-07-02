@@ -301,7 +301,7 @@ function Restaurant(props) {
 	const [rerender, setRerender] = useState(0)
 
 	useEffect(() => {
-		axios.get("http://localhost:3100/api/v1/collect/" + place_id, {
+		axios.get("http://184.169.138.82:3100/api/v1/collect/" + place_id, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
@@ -313,17 +313,17 @@ function Restaurant(props) {
 	}, [])
 
 	useEffect(() => {
-		axios.get("http://localhost:3100/api/v1/restaurant/" + place_id)
+		axios.get("http://184.169.138.82:3100/api/v1/restaurant/" + place_id)
 		.then(function(response){
 			console.log(response)
 			setInfo(response.data)
 		});
-		axios.get("http://localhost:3100/api/v1/review/" + place_id)
+		axios.get("http://184.169.138.82:3100/api/v1/review/" + place_id)
 		.then(function(response){
 			console.log(response)
 			setReviews(response.data)
 		});
-		axios.get("http://localhost:3100/api/v1/tag/" + place_id)
+		axios.get("http://184.169.138.82:3100/api/v1/tag/" + place_id)
 		.then(function(response){
 			console.log(response)
 			setTags(response.data)
@@ -332,7 +332,7 @@ function Restaurant(props) {
 
 	function handleCollect() {
 		if(isCollected) {
-			axios.delete("http://localhost:3100/api/v1/collect/" + place_id, {
+			axios.delete("http://184.169.138.82:3100/api/v1/collect/" + place_id, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
@@ -344,7 +344,7 @@ function Restaurant(props) {
 			})
 		} 
 		else {
-			axios.post("http://localhost:3100/api/v1/collect", { place_id: place_id }, {
+			axios.post("http://184.169.138.82:3100/api/v1/collect", { place_id: place_id }, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response) {
@@ -377,7 +377,7 @@ function Restaurant(props) {
 				rate: rate,
 				comment: comment
 			}
-			axios.post("http://localhost:3100/api/v1/review/" + place_id, data, {
+			axios.post("http://184.169.138.82:3100/api/v1/review/" + place_id, data, {
 				headers: { Authorization: `Bearer ` + props.token }
 			})
 			.then(function(response){
