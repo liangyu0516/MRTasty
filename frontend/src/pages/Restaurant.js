@@ -17,33 +17,33 @@ import restaurantImg from '../images/restaurant.png'
 const axios = require('axios');
 
 const Main = styled.div`
-	margin-bottom: 5vh;
+	margin-bottom: 2vh;
 	display: flex;
 	flex-direction: row;
 `
 
 const MainImg = styled.img`
-	width: 20vw;
-	height: 20vw;
+	width: 16vw;
+	height: 16vw;
 	border-radius: 10px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `
 
 const MainInfo = styled.div`
-	width: 40vw;
-	height: 18vw;
-	margin-left: 3vw;
+	width: 43vw;
+	height: 14vw;
+	margin-left: 1vw;
 	padding: 1vw 2.5vw;
 	text-align: left;
-	border: 0.1px solid black;
 	border-radius: 10px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-	background-color: rgb(231, 243, 243);
+	background-color: white;
 	overflow: hidden;
 `
 
 const Title = styled.div`
 	margin-bottom: 3vh;
+	color: rgb(46, 92, 92);
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -70,13 +70,12 @@ const Ratings = styled.div`
 const Rating = styled.div`
 	width: 5vw;
 	margin-right: 1vw;
-	padding: 0.7vw 0.5vw;
-	font-size: 1vw;
+	padding: 0.7vw 0.2vw;
+	font-size: 0.5vw;
 	font-weight: bolder;
 	text-align: center;
-	border: 1px solid black;
-	border-radius: 10px;
-	box-shadow: 0px 2px 1px black;
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	background-color: #FFFFAA;
 	display: flex;
 	flex-direction: row;
@@ -85,35 +84,33 @@ const Rating = styled.div`
 `
 
 const RatingImg = styled.img`
-	width: 1.5vw;
-	height: 1.5vw;
+	width: 1vw;
+	height: 1vw;
 `
 
 const Open = styled.div`
 	width: 5vw;
 	margin-bottom: 1.5vh;
-	padding: 0.7vw 0.5vw;
-	font-size: 1vw;
+	padding: 0.7vw 0.2vw;
+	font-size: 0.5vw;
 	font-weight: bolder;
 	letter-spacing: 0.1vw;
 	text-align: center;
-	border: 1px solid black;
-	border-radius: 10px;
-	box-shadow: 0px 2px 1px black;
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	background-color: #BBFFBB;
 `
 
 const Close = styled.div`
 	width: 5vw;
 	margin-bottom: 1vh;
-	padding: 0.7vw 0.5vw;
-	font-size: 1vw;
+	padding: 0.7vw 0.2vw;
+	font-size: 0.5vw;
 	font-weight: bolder;
 	letter-spacing: 0.1vw;
 	text-align: center;
-	border: 1px solid black;
-	border-radius: 10px;
-	box-shadow: 0px 2px 1px black;
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	background-color: #FF5151;
 `
 
@@ -127,23 +124,23 @@ const Tags = styled.div`
 const Tag = styled.div`
 	width: 4.4vw;
 	margin-right: 1vw;
-	padding: 0.7vw 0.8vw;
-	font-size: 1vw;
+	padding: 0.7vw 0.5vw;
+	font-size: 0.5vw;
 	font-weight: bolder;
 	letter-spacing: 0.1vw;
 	text-align: center;
-	border: 1px solid black;
-	border-radius: 10px;
-	box-shadow: 0px 2px 1px black;
+	border-radius: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	background-color: #ACD6FF;
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	align-items: center;
 `
 
 const TagImg = styled.img`
-	width: 1.5vw;
-	height: 1.5vw;
+	width: 1vw;
+	height: 1vw;
 	margin-right: 0.5vw;
 `
 
@@ -153,19 +150,19 @@ const Detail = styled.div`
 `
 
 const DetailInfo = styled.div`
-	width: 15vw;
+	width: 11vw;
 	height: 110vh;
-	margin-right: 3vw;
+	margin-right: 1vw;
 	padding: 2vw 2.5vw 0.5vw;
+	font-size: 1.1vw;
 	text-align: left;
-	border: 0.1px solid black;
 	border-radius: 10px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-	background-color: rgb(231, 243, 243);
+	background-color: white;
 `
 
 const DetailInfoTitle = styled.div`
-	font-size: 1.5vw;
+	font-size: 1.3vw;
 	margin-bottom: 1vh;
 	color: #009393;
 	font-weight: 600;
@@ -175,8 +172,8 @@ const DetailInfoTitle = styled.div`
 `
 
 const DetailInfoImg = styled.img`
-	width: 1.5vw;
-	height: 1.5vw;
+	width: 1.3vw;
+	height: 1.3vw;
 	margin-right: 0.3vw;
 `
 
@@ -190,15 +187,14 @@ const DetailExperience = styled.div`
 `
 
 const Comment = styled.div`
-	width: 40vw;
+	width: 36.5vw;
 	height: 29vh;
-	margin-bottom: 3vh;
+	margin-bottom: 2vh;
 	padding: 2vh 2.5vw;
 	text-align: left;
-	border: 0.1px solid black;
 	border-radius: 10px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-	background-color: rgb(231, 243, 243);
+	background-color: white;
 	display: flex;
 	flex-direction: column;
 `
@@ -213,6 +209,11 @@ const CommentStars = styled.div`
 	margin-bottom: 1.5vh;
 	display: flex;
 	flex-direction: row;
+`
+
+const CommentStarImg = styled.img`
+	width: 1.5vw;
+	height: 1.5vw;
 `
 
 const CommentContent = styled.textarea`
@@ -237,14 +238,13 @@ const CommentSubmit = styled.button`
 `
 
 const Reviews = styled.div`
-	width: 40vw;
-	height: 75vh;
-	padding: 10px 2.5vw;
+	width: 36.5vw;
+	height: 76vh;
+	padding: 4vh 2.5vw 0;
 	text-align: left;
-	border: 0.1px solid black;
 	border-radius: 10px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-	background-color: rgb(231, 243, 243);
+	background-color: white;
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
@@ -267,8 +267,8 @@ const Reviews = styled.div`
 `
 
 const Review = styled.div`
-	margin: 1vh 0;
-	padding: 2vw 0vw;
+	margin: 0 0 4vh;
+	padding-bottom: 4vh;
 	text-align: left;
 	border-bottom: 1px solid #408080;
 `
@@ -396,7 +396,7 @@ function Restaurant(props) {
 	}
 	
 	return (
-		<div style={{'padding': '5vh 15vw', 'font-family': 'Microsoft YaHei'}}>
+		<div style={{'padding': '5vh 20vw', 'font-family': 'Microsoft YaHei', 'background-color': 'rgb(231, 243, 243)'}}>
 			<Main>
 				<MainImg src={info?.Photo_reference !== null ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photo_reference=' + info?.Photo_reference + '&key=AIzaSyDy-ncnSDLOJlt_3nqom7swxEfaV4ogfIY':restaurantImg } />
 				<MainInfo>
@@ -444,14 +444,14 @@ function Restaurant(props) {
 					<DetailInfoTitle>
 						<DetailInfoImg src={website} />網站
 					</DetailInfoTitle>
-					<DetailInfoContent>{info?.Website ? <a href={info?.Website}>點我前往</a>:'無'}</DetailInfoContent>
+					<DetailInfoContent>{info?.Website ? <a href={info?.Website} style={{ 'color': 'black' }}>點我前往</a>:'無'}</DetailInfoContent>
 				</DetailInfo>
 				<DetailExperience>
 					<Comment>
 						<CommentProfileImg src={profile} />
 						<CommentStars>
 							{[0, 0, 0, 0, 0].fill(1, 0, rate).map((type, index) => (
-								<RatingImg style={{ 'cursor': 'pointer'}} src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
+								<CommentStarImg style={{ 'cursor': 'pointer'}} src={type === 1 ? star:whitestar} onClick={() => handleClickOnStar(index + 1)} />
 							))}
 						</CommentStars>
 						<CommentContent value={comment} onChange={(e) => setComment(e.target.value)} />

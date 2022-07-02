@@ -28,5 +28,5 @@ for restaurant in restaurants:
 		avg_ratings = float("{:.1f}".format(float(result)))
 		cur.execute("UPDATE RESTAURANT SET Rating = " + str(avg_ratings) + ", Total_ratings = " + str(total_ratings) + " WHERE Place_id = '" + restaurant[4] + "'")
 	else:
-		cur.execute("UPDATE RESTAURANT SET Total_ratings = " + str(total_ratings) + " WHERE Place_id = '" + restaurant[4] + "'")
+		cur.execute("UPDATE RESTAURANT SET Rating = NULL, Total_ratings = " + str(total_ratings) + " WHERE Place_id = '" + restaurant[4] + "'")
 	db.commit()
