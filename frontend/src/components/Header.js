@@ -14,7 +14,7 @@ const StyledHeader = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	border-bottom: 0.5vh solid black;
+	border-bottom: 0.1vh solid black;
 `
 
 const Logo = styled.img`
@@ -31,16 +31,17 @@ const Type = styled.div`
 	font-weight: 500;
 	font-family: Microsoft YaHei;
 	text-align: center;
-	border: ${props => props.isSelected ? '0':'1px'} solid black;
-	border-radius: 10px;
+	border: ${props => props.isSelected ? '0':'1px'} solid white;
+	border-radius: 7px;
+	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 	background-color: ${props => props.isSelected ? '#00808C':'white'};
-	box-shadow: 3px 3px 1px black;
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	:active {
-		box-shadow: 0px 0px 1px black;
+		box-shadow: 0px 3px 1px black;
+		border: 1px solid black;
 	}
 `
 

@@ -11,15 +11,16 @@ const Button = styled.button`
 	letter-spacing: 0.1vw;
 	color: white;
 	background-color: #00808C;
-	border: 2px solid black;
+	border: 0 solid black;
 	border-radius: 10px;
-	box-shadow: 0px 3px 1px black;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	cursor: pointer;
 	:hover {
 		background-color: #00B2C2;
 	}
 	:active {
-		box-shadow: 0px 0px 1px black;
+		color: #00808C;
+		background-color: white;
 	}
 `
 	
