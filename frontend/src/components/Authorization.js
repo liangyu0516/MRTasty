@@ -75,7 +75,6 @@ export default class Authorization extends Component {
 			})
 			.catch((error) => {
 				Swal.fire({  
-					position: 'top-end',
 					icon: 'error',  
 					title: '註冊失敗 :<',  
 					text: '這個信箱已經使用過了',
@@ -112,7 +111,6 @@ export default class Authorization extends Component {
 				window.localStorage.setItem('username', response.data.username)
 				if(response.status === 200) {
 					Swal.fire({  
-						position: 'top-end',  
 						icon: 'success',  
 						title: '登入成功',  
 						showConfirmButton: false,  

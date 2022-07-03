@@ -7,6 +7,8 @@ import coffee from '../images/coffee.png'
 import drink from '../images/drink.png'
 import profile from '../images/profile.png'
 import Authorization from './Authorization'
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const StyledHeader = styled.div`
@@ -18,7 +20,7 @@ const StyledHeader = styled.div`
 `
 
 const Logo = styled.img`
- 	height: 8vh;
+ 	height: 7vh;
 	aspectRatio: 603 / 212;
 `
 
@@ -58,11 +60,45 @@ const ProfileName = styled.div`
 `
 
 const ProfileImg = styled.img`
+	margin-right: 1vw;
 	width: 2.5vw;
 	height: 2.5vw;
 `
 
+const Button = styled.button`
+	padding: 0.7vw 1.2vw;
+	font-size: 1.2vw;
+	font-weight: 600;
+	letter-spacing: 0.1vw;
+	color: white;
+	background-color: #00808C;
+	border: 0 solid black;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	cursor: pointer;
+	:hover {
+		background-color: #00B2C2;
+	}
+	:active {
+		color: #00808C;
+		background-color: white;
+	}
+`
+
 function Header(props) {
+	function handleClickSignOut() {
+		props.setToken()
+		Cookies.remove('access_token')
+		window.localStorage.clear()
+		Swal.fire({  
+			icon: 'success',  
+			title: '登出成功 :D',  
+			text: '歡迎下次再來',
+			showConfirmButton: false,  
+			timer: 2000 
+		});
+	}
+
 	if(props.token == null) {
 		return (
 			<StyledHeader>
@@ -91,12 +127,13 @@ function Header(props) {
 					<Type isSelected={props.type === '咖啡廳' ? true:false} onClick={() => props.setType('咖啡廳')}><TypeImg src={coffee} />咖啡廳</Type>
 					<Type isSelected={props.type === '飲料' ? true:false} onClick={() => props.setType('飲料')}><TypeImg src={drink} />飲料</Type>
 				</div>
-				<Link to="/profile" style={{ 'color': 'black', 'textDecoration': 'none' }}>
-					<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
+				<div style={{'display': 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
+					<Link to="/profile" style={{ 'display': 'flex', 'flex-direction': 'row', 'align-items': 'center', 'color': 'black', 'textDecoration': 'none' }}>
 						<ProfileName>{window.localStorage.getItem('username')}</ProfileName>
 						<ProfileImg src={profile} />
-					</div>
-				</Link>
+					</Link>
+					<Button onClick={handleClickSignOut}>登出</Button>
+				</div>
 			</StyledHeader>
 		);
 	}
