@@ -66,6 +66,16 @@ const Restaurant = styled.div`
 	background-color: white;
 `
 
+const Nothing = styled.div`
+	margin-bottom: 2vh;
+	padding: 3vh;
+	width: 30vw;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	background-color: white;
+`
+
 const MainImg = styled.img`
 	width: 7vw;
 	height: 7vw;
@@ -124,8 +134,20 @@ class Modal extends React.Component {
 	  componentWillUnmount() {
 		modalRoot.removeChild(this.el);
 	  }
-
+	  
 	render() {
+		if(this.props.restaurants?.length === 0) {
+			return createPortal (
+				<StyledModal onClick={() => this.props.setIsSelected(false)}>
+					<Station>
+						{this.props.station.chinese}
+					</Station>
+					<Nothing>這附近沒有你要的餐廳哦...</Nothing>
+				</StyledModal>
+			, this.el,
+			);
+		}
+
 		return createPortal (
 			<StyledModal onClick={() => this.props.setIsSelected(false)}>
 				<Station>
