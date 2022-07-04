@@ -119,11 +119,12 @@ export default class Authorization extends Component {
 				}
 			})
 			.catch((error) => {
+				console.log(error)
 				Swal.fire({  
 					position: 'top-end',
 					icon: 'error',  
 					title: '登入失敗 :<',  
-					text: error.response?.data.error ?? error,
+					//text: error.response?.data.error ?? error,
 					confirmButtonText: '好的'  
 				});
 			})
