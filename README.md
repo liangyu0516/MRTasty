@@ -12,7 +12,7 @@ This project aims to help user find specific type of restaurant near every MRT s
 	```
 	mysql -u <user_name> -p MRTasty < MRTasty.sql
 	```
-4 Create `process.env` as below.
+4. Create `process.env` as below.
 	```
 	PORT = 3100
 	DB_HOST = <host for MySQL server>
@@ -21,12 +21,12 @@ This project aims to help user find specific type of restaurant near every MRT s
 	DB_DATABASE = "MRTasty"
 	TOKEN_KEY = "b7b16ad9db0ca7c5705cba37840e4ec310740c62beea61cfd9bdcee0720797a6c8bb1b3ffc0d781601fb77dbdaa899acfd08ac560aec19f2d18bb3b6e25beb7a"
 	```
-2. Start server.
+5. Start server.
 	```
 	npm install
 	node index.js
 	```
-3. Open one terminal for frontend.
+6. Open one terminal for frontend.
 	```
 	cd fontend
 	npm install
