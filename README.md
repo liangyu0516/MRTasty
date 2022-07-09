@@ -1,22 +1,24 @@
 # MRTasty
+![](https://i.imgur.com/ZnJRatx.png)
 ## Project Vision 專案目的
 This project aims to help user find specific type of restaurant near every MRT station.
-## How to Run the Project
+## How to Run the Project 專案建立
 1. Clone the repo
-    ```
-    git clone https://github.com/liangyu0516/MRTasty.git
-    ```
+	```
+	git clone https://github.com/liangyu0516/MRTasty.git
+	```
+2. Install MySQL and create a database named `MRTasty`
 2. Open another terminal for backend
-    ```
-    npm install
-    node index.js
-    ```
+	```
+	npm install
+	node index.js
+	```
 3. Open one terminal for frontend
-    ```
-    cd fontend
-    npm install
-    npm start
-    ```
+	```
+	cd fontend
+	npm install
+	npm start
+	```
 ## Technique 使用技術
 ### Frontend
 - Language : HTML / CSS / Javascript
